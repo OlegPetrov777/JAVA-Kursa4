@@ -1,27 +1,22 @@
-package com.example.demo.entity;
+package com.example.project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Model {
+@Table(name = "companys")
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private Company company;
-
-    @OneToOne
-    private Product product;
-
+    @OneToMany (mappedBy="company", fetch=FetchType.EAGER)
+    private Collection<Model> models;
 }

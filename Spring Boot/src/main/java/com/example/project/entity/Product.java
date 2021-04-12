@@ -1,13 +1,15 @@
-package com.example.demo.entity;
+package com.example.project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,10 @@ public class Product {
 
     private int count;
 
-    @ManyToOne(targetEntity = Model.class)
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="model_id")
     private Model model;
+
+    @OneToMany (mappedBy="product", fetch=FetchType.EAGER)
+    private Collection<Order> orders;
 }

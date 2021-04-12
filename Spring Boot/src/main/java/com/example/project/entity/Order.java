@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -10,16 +10,11 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String firstName_customer;
-
-    private String lastName_customer;
-
-    private String product_id;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date_of_create;
@@ -27,6 +22,15 @@ public class Order {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date_of_ready;
 
-    private String address;
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="customer_id")
+    private Customer customer;
 
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="employee_id")
+    private Employee employee;
+
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="product_id")
+    private Product product;
 }

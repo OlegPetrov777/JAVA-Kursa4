@@ -1,13 +1,15 @@
-package com.example.demo.entity;
+package com.example.project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +24,7 @@ public class Employee {
     private String password;
 
     private boolean admin_status;
+
+    @OneToMany (mappedBy="employee", fetch=FetchType.EAGER)
+    private Collection<Order> orders;
 }
