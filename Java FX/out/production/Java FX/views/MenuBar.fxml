@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.MenuBarController">
     <children>
-        <AnchorPane layoutY="31.0" prefHeight="570.0" prefWidth="1002.0" style="-fx-background-color: MediumSpringGreen;" />
+        <AnchorPane layoutY="31.0" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: MediumSpringGreen;" />
       <Label fx:id="labelG" layoutX="6.0" layoutY="-11.0" prefHeight="54.0" prefWidth="26.0" text="G" textAlignment="CENTER" textFill="#aaff00" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="-11.0">
          <font>
             <Font name="Impact" size="35.0" />

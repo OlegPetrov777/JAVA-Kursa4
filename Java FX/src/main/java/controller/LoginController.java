@@ -46,7 +46,7 @@ public class LoginController {
 
     @FXML
     private void clickButtons() {
-//       НАЖАТИЕ КНОПОК
+        /* НАЖАТИЕ КНОПОК */
         loginButton.setOnAction(event -> {
             signIn();
         });
@@ -54,35 +54,26 @@ public class LoginController {
         exitButton.setOnAction(event -> {
             exit();
         });
-
-//        loginTextField.getScene().setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                if (exitButton.isFocused())
-//                    exit();
-//                else if (loginButton.isFocused())
-//
-//            }
-//        });
     }
 
     @FXML
     private void signIn() {
-//        ВХОД В АККАУНТ
+        /* ВХОД В АККАУНТ */
         try {
             String login = "oleg";  // login
             String password = "1234";  // password
 
             if (loginTextField.getText().equals(login) && passwordField.getText().equals(password)) {
 
-//              ОТКРЫВАЕТСЯ ГЛАВНЫЙ ЭКРАН (MainScreen)
+                /* ОТКРЫВАЕТСЯ ГЛАВНЫЙ ЭКРАН (MainScreen) */
                 MenuBarController.loadView();
 
-//              ЗАКРЫВАЕТСЯ СТРАНИЦА LOGIN
+                /* ЗАКРЫВАЕТСЯ СТРАНИЦА LOGIN */
                 exit();
             } else if (loginTextField.getText().isEmpty()) {
-                throw new AppException("Пожалуйста, введите логин.");
+                throw new AppException("Введите логин.");
             } else if (passwordField.getText().isEmpty()) {
-                throw new AppException("Пожалуйста, введите пароль.");
+                throw new AppException("Введите пароль.");
             } else {
                 throw new AppException("Неверный логин или пароль.");
             }
@@ -98,41 +89,31 @@ public class LoginController {
 
     @FXML
     private void exit() {
-//        ЗАКРЫТИЕ СТРАНИЦЫ LOGIN
+        /* СКРЫВАЕТ ОКНО LOGIN */
+        System.out.println("Close LOGIN page");
         exitButton.getScene().getWindow().hide();
     }
 
     public static void loadView(Stage primaryStage) {
         try {
+            System.out.println("Open LOGIN page");
+
+            primaryStage.setTitle("GREENSPARK APP");
+            primaryStage.setResizable(false);
+
             FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/views/Login.fxml"));
-            Parent view = loader.load();
-            primaryStage.setScene(new Scene(view));
+            Parent root = loader.load();
+
+            primaryStage.setScene(new Scene(root));
 
             LoginController controller = loader.getController();
             controller.clickButtons();
 
-//            Parent view = FXMLLoader.load(LoginController.class.getResource("/views/Login.fxml"));
-//            primaryStage.setScene(new Scene(view));
             primaryStage.show();
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public static void loadView_2() {
-        try {
-            Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(MenuBarController.class.getResource("/views/Login.fxml"));
-            primaryStage.setScene(new Scene(root));
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        }
-
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

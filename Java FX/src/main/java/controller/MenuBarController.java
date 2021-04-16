@@ -54,12 +54,15 @@ public class MenuBarController {
 
     @FXML
     private void exit() {
+        System.out.println("Close MAIN page");
         labelG.getScene().getWindow().hide();
     }
 
     public static void loadView() {
         try {
+            System.out.println("Open MAIN page");
             Stage primaryStage = new Stage();
+            primaryStage.setTitle("MenuBar");
             Parent root = FXMLLoader.load(MenuBarController.class.getResource("/views/MenuBar.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
