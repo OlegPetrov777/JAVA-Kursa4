@@ -10,7 +10,10 @@
    <top>
       <MenuBar prefHeight="26.0" prefWidth="486.0" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="productsButton" mnemonicParsing="false" text="Products" />
+          <Menu fx:id="productsButton" mnemonicParsing="false" text="Products">
+               <items>
+                  <MenuItem fx:id="openProducts" mnemonicParsing="false" text="Open" />
+               </items></Menu>
           <Menu fx:id="customersButton" mnemonicParsing="false" text="Customers" />
             <Menu fx:id="ordersButton" mnemonicParsing="false" text="Orders" />
             <Menu fx:id="aboutButton" mnemonicParsing="false" text="About Us" />

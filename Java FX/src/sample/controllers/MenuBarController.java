@@ -2,6 +2,9 @@ package sample.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +33,9 @@ public class MenuBarController {
     private Menu productsButton;
 
     @FXML
+    private MenuItem openProducts;
+
+    @FXML
     private Menu customersButton;
 
     @FXML
@@ -47,11 +53,17 @@ public class MenuBarController {
 
     @FXML
     void initialize() {
-        loadViewAnotherPage();
-        exitButton.setOnAction(vent -> {
+        loadViewAnotherPage("main");
+
+        openProducts.setOnAction(event -> {
+            loadViewAnotherPage("products");
+        });
+
+        exitButton.setOnAction(event -> {
             exit();
         });
     }
+
 
     @FXML
     private void exit() {
@@ -59,11 +71,11 @@ public class MenuBarController {
         borderPane.getScene().getWindow().hide();
     }
 
-    private void loadViewAnotherPage() {
+    private void loadViewAnotherPage(String text) {
         try {
             viewPane.getChildren().clear();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + text + ".fxml"));
             Parent root = loader.load();
 
             viewPane.getChildren().add(root);

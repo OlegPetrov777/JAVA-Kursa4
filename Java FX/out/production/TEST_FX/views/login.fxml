@@ -8,7 +8,7 @@
    <children>
       <AnchorPane layoutY="-21.0" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" AnchorPane.bottomAnchor="0.0">
          <children>
-            <AnchorPane layoutX="150.0" layoutY="50.0" prefHeight="250.0" prefWidth="300.0" style="-fx-border-color: YellowGreen; -fx-background-color: DarkGreen;" AnchorPane.bottomAnchor="50.0">
+            <AnchorPane layoutX="150.0" layoutY="50.0" prefHeight="250.0" prefWidth="300.0" style="-fx-border-color: #9acd32; -fx-background-color: DarkGreen;" AnchorPane.bottomAnchor="50.0">
                <children>
                   <TextField fx:id="loginTextField" layoutX="50.0" layoutY="94.0" prefHeight="26.0" prefWidth="200.0" promptText="login">
                      <font>
