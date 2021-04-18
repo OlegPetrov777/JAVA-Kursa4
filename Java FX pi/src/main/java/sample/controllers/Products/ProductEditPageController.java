@@ -35,7 +35,7 @@ public class ProductEditPageController {
     @FXML
     void initialize() { }
 
-
+    /* ПЕРЕМЕННЫЕ */
     private Stage dialogueStage;
     private Product product;
     private boolean okClicked = false;
@@ -44,7 +44,6 @@ public class ProductEditPageController {
     public void setDialogueStage(Stage dialogueStage) {
         this.dialogueStage = dialogueStage;
     }
-
 
 
     public void setProduct(Product product){

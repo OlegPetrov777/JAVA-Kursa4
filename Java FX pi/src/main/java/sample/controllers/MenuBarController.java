@@ -1,26 +1,17 @@
 package sample.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import sample.controllers.Products.ProductsController;
+
 
 public class MenuBarController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private BorderPane borderPane;
@@ -32,31 +23,16 @@ public class MenuBarController {
     private MenuItem closeButton;
 
     @FXML
-    private Menu productsButton;
-
-    @FXML
     private MenuItem openProducts;
-
-    @FXML
-    private Menu customersButton;
 
     @FXML
     private MenuItem openCustomers;
 
     @FXML
-    private Menu ordersButton;
-
-    @FXML
     private MenuItem openOrders;
 
     @FXML
-    private Menu aboutButton;
-
-    @FXML
     private MenuItem openAboutUs;
-
-    @FXML
-    private Menu profileButton;
 
     @FXML
     private MenuItem openProdfile;
@@ -66,15 +42,23 @@ public class MenuBarController {
 
     @FXML
     private AnchorPane viewPane;
-
     public static Stage primaryStage = new Stage();
 
+    /**
+     * Загрузка основного раздела на главный Pane (view Pane)
+     */
     @FXML
     void initialize() {
-        loadViewAnotherPage("main");
+        showAnotherPage("main");
+    }
 
+    /**
+     * Обработка нажатий кнопок в меню баре
+     */
+    @FXML
+    public void clickButtons() {
         mainpageButton.setOnAction(event -> {
-            loadViewAnotherPage("main");
+            showAnotherPage("main");
         });
 
         closeButton.setOnAction(event -> {
@@ -82,34 +66,35 @@ public class MenuBarController {
         });
 
         openProducts.setOnAction(event -> {
-            loadViewAnotherPage("products");
+            showAnotherPage("products");
         });
 
-        customersButton.setOnAction(event -> {
-            loadViewAnotherPage("customers");
+        openCustomers.setOnAction(event -> {
+            showAnotherPage("customers");
         });
 
         openOrders.setOnAction(event -> {
-            loadViewAnotherPage("orders");
+            showAnotherPage("orders");
         });
 
         openAboutUs.setOnAction(event -> {
-            loadViewAnotherPage("about");
+            showAnotherPage("about");
         });
 
         exitButton.setOnAction(event -> {
             exit();
         });
+
+        openProdfile.setOnAction(event -> {
+        });
     }
 
-
-    @FXML
-    private void exit() {
-        System.out.println("Close MAIN page");
-        borderPane.getScene().getWindow().hide();
-    }
-
-    private void loadViewAnotherPage(String text) {
+    /**
+     * Передаю название FXML файла в зависимоти от нажатой кнопки
+     * Загружаем на главный Pane (view Pane)
+     * @param text
+     */
+    private void showAnotherPage(String text) {
         try {
             viewPane.getChildren().clear();
 
@@ -122,17 +107,34 @@ public class MenuBarController {
         }
     }
 
-    public static void loadView() {
+    /**
+     * Загрузка страницы MenuBar
+     */
+    public static void showMenuBarPage() {
         try {
             primaryStage.setTitle("GreensPark APP");
-            Parent root = FXMLLoader.load(ProductsController.class.getResource("/views/menuBar.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(MenuBarController.class.getResource("/views/menuBar.fxml"));
+
+            Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(false);  // Не позволяет изменять размеры окна
+
+            MenuBarController controller = loader.getController();
+            controller.clickButtons();
+
             primaryStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * Закрывается главная страница MenuBar
+     */
+    @FXML
+    private void exit() {
+        borderPane.getScene().getWindow().hide();
     }
 }

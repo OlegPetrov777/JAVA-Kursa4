@@ -21,12 +21,6 @@ import sample.models.Product;
 public class ProductsController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private TableView<Product> productsTable;
 
     @FXML
@@ -53,30 +47,10 @@ public class ProductsController {
     @FXML
     private Button deleteButton;
 
-    private RestApi myApiSession;
-    private static ObservableList<Product> productData = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
-        /* НАЖАТИЕ НА КНОПКУ NEW */
-        newButton.setOnAction(event -> {
-            Product product = new Product();
-            boolean isOkClicked = showPersonEditPage(product, "New Product");
-            if (isOkClicked){
-                productData.add(product);
-            }
-        });
-
-        /* НАЖАТИЕ НА КНОПКУ EDIT */
-        editButton.setOnAction(event -> {
-
-        });
-
-        /* НАЖАТИЕ НА КНОПКУ DELETE */
-        deleteButton.setOnAction(event -> {
-
-        });
-
+        clickButtons();
 
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
         colorColumn.setCellValueFactory(cellData -> cellData.getValue().getCountProperty());
@@ -87,9 +61,29 @@ public class ProductsController {
     }
 
     /**
-     * ОКНО СОЗДАНИЯ/ИЗМЕНЕНИЯ ПРОДУКТОВ
+     * Обработка нажатий кнопок в EditProducts
      */
-    public boolean showPersonEditPage(Product product, String title){
+    @FXML
+    public void clickButtons() {
+        /* НАЖАТИЕ НА КНОПКУ NEW */
+        newButton.setOnAction(event -> {
+            Product product = new Product();
+            showPersonEditPage(product, "New Product");
+        });
+
+        /* НАЖАТИЕ НА КНОПКУ EDIT */
+        editButton.setOnAction(event -> {
+        });
+
+        /* НАЖАТИЕ НА КНОПКУ DELETE */
+        deleteButton.setOnAction(event -> {
+        });
+    }
+
+    /**
+     * Загрузка окна создания/изменения продусктов Products
+     */
+    public void showPersonEditPage(Product product, String title){
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/views/productEditPage.fxml"));
@@ -107,11 +101,9 @@ public class ProductsController {
             controller.setDialogueStage(dialogueStage);
             controller.setProduct(product);
             dialogueStage.showAndWait();
-            return controller.isOkClicked();
 
         } catch (IOException e){
             e.printStackTrace();
-            return false;
         }
     }
 }

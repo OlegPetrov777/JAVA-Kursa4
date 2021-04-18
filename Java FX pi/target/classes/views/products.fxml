@@ -12,7 +12,7 @@
           <TableColumn fx:id="priceColumn" prefWidth="91.20001983642578" text="Price" />
             <TableColumn fx:id="colorColumn" prefWidth="108.79998779296875" text="Color" />
             <TableColumn fx:id="countColumn" prefWidth="66.4000244140625" text="Count" />
-            <TableColumn fx:id="moddelColumn" prefWidth="157.5999755859375" text="Model" />
+            <TableColumn fx:id="modelColumn" prefWidth="157.5999755859375" text="Model" />
             <TableColumn fx:id="orderColumn" prefWidth="125.59994506835938" text="Order" />
         </columns>
       </TableView>
