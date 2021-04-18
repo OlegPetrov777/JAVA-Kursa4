@@ -91,8 +91,6 @@ public class LoginController {
 
     @FXML
     private void exit() {
-        /* СКРЫВАЕТ ОКНО LOGIN */
-        System.out.println("Close LOGIN page");
         exitButton.getScene().getWindow().hide();
     }
 

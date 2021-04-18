@@ -57,22 +57,38 @@ public class Product implements APIModel {
     public String getColor() {
         return color.get();
     }
+    public StringProperty getColorProperty() {
+        return color;
+    }
 
     public String getCount() {
         return count.get();
+    }
+    public StringProperty getCountProperty() {
+        return count;
     }
 
     public String getPrice() {
         return price.get();
     }
+    public StringProperty getPriceProperty() {
+        return price;
+    }
 
     public String getModel() {
         return model.get();
+    }
+    public StringProperty getModelProperty() {
+        return model;
     }
 
     public String getOrders() {
         return orders.get();
     }
+    public StringProperty getOrderProperty() {
+        return orders;
+    }
+
 
     /* Setters */
     public void setColor(String color) {

@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
+<AnchorPane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
    <children>
-      <TableView layoutY="55.0" prefHeight="267.0" prefWidth="600.0" style="-fx-background-color: #2DE34F;">
+      <TableView fx:id="productsTable" layoutY="55.0" prefHeight="267.0" prefWidth="600.0" style="-fx-background-color: #2DE34F;">
         <columns>
           <TableColumn prefWidth="54.400022864341736" text="ID" />
-          <TableColumn prefWidth="91.20001983642578" text="Price" />
-            <TableColumn prefWidth="108.79998779296875" text="Color" />
-            <TableColumn prefWidth="66.4000244140625" text="Count" />
-            <TableColumn prefWidth="157.5999755859375" text="Model" />
-            <TableColumn prefWidth="125.59994506835938" text="Order" />
+          <TableColumn fx:id="priceColumn" prefWidth="91.20001983642578" text="Price" />
+            <TableColumn fx:id="colorColumn" prefWidth="108.79998779296875" text="Color" />
+            <TableColumn fx:id="countColumn" prefWidth="66.4000244140625" text="Count" />
+            <TableColumn fx:id="moddelColumn" prefWidth="157.5999755859375" text="Model" />
+            <TableColumn fx:id="orderColumn" prefWidth="125.59994506835938" text="Order" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="10.0" text="Products" textFill="#0c4600">
