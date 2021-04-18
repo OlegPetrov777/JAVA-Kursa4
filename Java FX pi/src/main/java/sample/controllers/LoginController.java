@@ -35,13 +35,9 @@ public class LoginController {
     @FXML
     public void clickButtons() {
         /* НАЖАТИЕ КНОПОК */
-        loginButton.setOnAction(event -> {
-            signIn();
-        });
+        loginButton.setOnAction(event -> signIn());
 
-        exitButton.setOnAction(event -> {
-            exit();
-        });
+        exitButton.setOnAction(event -> exit());
     }
 
     /**

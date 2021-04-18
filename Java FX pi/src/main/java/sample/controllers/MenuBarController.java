@@ -57,42 +57,26 @@ public class MenuBarController {
      */
     @FXML
     public void clickButtons() {
-        mainpageButton.setOnAction(event -> {
-            showAnotherPage("main");
-        });
+        mainpageButton.setOnAction(event -> showAnotherPage("main"));
 
-        closeButton.setOnAction(event -> {
-            exit();
-        });
+        closeButton.setOnAction(event -> exit());
 
-        openProducts.setOnAction(event -> {
-            showAnotherPage("products");
-        });
+        openProducts.setOnAction(event -> showAnotherPage("products"));
 
-        openCustomers.setOnAction(event -> {
-            showAnotherPage("customers");
-        });
+        openCustomers.setOnAction(event -> showAnotherPage("customers"));
 
-        openOrders.setOnAction(event -> {
-            showAnotherPage("orders");
-        });
+        openOrders.setOnAction(event -> showAnotherPage("orders"));
 
-        openAboutUs.setOnAction(event -> {
-            showAnotherPage("about");
-        });
+        openAboutUs.setOnAction(event -> showAnotherPage("about"));
 
-        exitButton.setOnAction(event -> {
-            exit();
-        });
+        exitButton.setOnAction(event -> exit());
 
-        openProdfile.setOnAction(event -> {
-        });
+        openProdfile.setOnAction(event -> exit());
     }
 
     /**
      * Передаю название FXML файла в зависимоти от нажатой кнопки
      * Загружаем на главный Pane (view Pane)
-     * @param text
      */
     private void showAnotherPage(String text) {
         try {
