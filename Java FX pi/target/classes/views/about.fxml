@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="119.0" layoutY="14.0" text="ЭТО ГОВНО СДЕЛАЛ">
+         <font>
+            <Font name="Impact" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="228.0" layoutY="74.0" text="Студент ПИ19-2">
+         <font>
+            <Font name="Impact" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="244.0" fitWidth="278.0" layoutX="169.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../static/oleg.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="438.0" layoutY="328.0" text="Oleg">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

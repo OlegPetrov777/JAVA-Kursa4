@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
+   <children>
+      <TableView layoutY="55.0" prefHeight="267.0" prefWidth="600.0" style="-fx-background-color: #2DE34F;">
+        <columns>
+          <TableColumn prefWidth="54.400022864341736" text="ID" />
+          <TableColumn prefWidth="91.20001983642578" text="Price" />
+            <TableColumn prefWidth="108.79998779296875" text="Color" />
+            <TableColumn prefWidth="66.4000244140625" text="Count" />
+            <TableColumn prefWidth="157.5999755859375" text="Model" />
+            <TableColumn prefWidth="125.59994506835938" text="Order" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="10.0" text="Products" textFill="#0c4600">
+         <font>
+            <Font name="Impact" size="24.0" />
+         </font>
+      </Label>
+      <ButtonBar layoutY="325.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="newButton" mnemonicParsing="false" text="New" />
+            <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

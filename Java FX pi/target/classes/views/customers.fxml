@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: MediumSpringGreen;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.CustomersController">
+   <children>
+      <TableView layoutY="54.0" prefHeight="267.0" prefWidth="600.0" style="-fx-background-color: #2DE34F;">
+        <columns>
+          <TableColumn prefWidth="54.400022864341736" text="ID" />
+            <TableColumn prefWidth="91.20001983642578" text="FirstName" />
+            <TableColumn prefWidth="91.20001983642578" text="LastName" />
+            <TableColumn prefWidth="115.0" text="Email" />
+          <TableColumn prefWidth="120.0" text="Address" />
+            <TableColumn prefWidth="124.79998779296875" text="Orders" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="10.0" text="Customers" textFill="#0c4600">
+         <font>
+            <Font name="Impact" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
