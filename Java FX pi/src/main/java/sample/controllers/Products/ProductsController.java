@@ -2,7 +2,7 @@ package sample.controllers.Products;
 
 import java.io.IOException;
 import javafx.scene.control.TableColumn;
-//import javafx.scene.control.TableView;
+import javafx.scene.control.TableView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,17 @@ import sample.models.Product;
 
 public class ProductsController {
 
-//    private TableView<Product> productsTable;
+    @FXML
+    private TableView<Product> productsTable;
+
+    @FXML
+    private TableColumn<Product, String> ID;
+
+    @FXML
+    private TableColumn<Product, String> modelColumn;
+
+    @FXML
+    private TableColumn<Product, String> modelIDColumn;
 
     @FXML
     private TableColumn<Product, String> priceColumn;
@@ -26,12 +36,6 @@ public class ProductsController {
 
     @FXML
     private TableColumn<Product, String> countColumn;
-
-    @FXML
-    private TableColumn<Product, String> modelColumn;
-
-    @FXML
-    private TableColumn<Product, String> orderColumn;
 
     @FXML
     private Button newButton;
@@ -47,11 +51,11 @@ public class ProductsController {
     void initialize() {
         clickButtons();
 
-        priceColumn.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
-        colorColumn.setCellValueFactory(cellData -> cellData.getValue().getCountProperty());
-        countColumn.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty());
-        modelColumn.setCellValueFactory(cellData -> cellData.getValue().getModelProperty());
-        orderColumn.setCellValueFactory(cellData -> cellData.getValue().getOrderProperty());
+//        priceColumn.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
+//        colorColumn.setCellValueFactory(cellData -> cellData.getValue().getCountProperty());
+//        countColumn.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty());
+//        modelColumn.setCellValueFactory(cellData -> cellData.getValue().getModelProperty());
+//        orderColumn.setCellValueFactory(cellData -> cellData.getValue().getOrderProperty());
 
     }
 

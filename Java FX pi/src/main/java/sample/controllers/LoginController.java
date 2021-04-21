@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import sample.exception.AppException;
 
 
@@ -34,11 +35,17 @@ public class LoginController {
      */
     @FXML
     public void clickButtons() {
-        /* НАЖАТИЕ КНОПОК */
         loginButton.setOnAction(event -> signIn());
-
         exitButton.setOnAction(event -> exit());
+
+        // АКТИВАЦИЯ Sign In ЧЕРЕЗ Enter
+        loginTextField.getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                signIn();
+            }
+        });
     }
+
 
     /**
      *  Выполняется вход в аккаунт
@@ -47,8 +54,8 @@ public class LoginController {
     private void signIn() {
 
         try {
-            String login = "oleg";  // login
-            String password = "1234";  // password
+            String login = "1";  // login
+            String password = "1";  // password
 
             if (loginTextField.getText().equals(login) && passwordField.getText().equals(password)) {
 

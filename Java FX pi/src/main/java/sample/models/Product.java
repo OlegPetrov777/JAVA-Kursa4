@@ -54,6 +54,11 @@ public class Product implements APIModel {
     }
 
     /* Getters */
+
+    public long getId() {
+        return id.get();
+    }
+
     public String getColor() {
         return color.get();
     }

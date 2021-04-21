@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -17,28 +17,22 @@ public class MenuBarController {
     private BorderPane borderPane;
 
     @FXML
-    private MenuItem mainpageButton;
+    private Button mainButton;
 
     @FXML
-    private MenuItem closeButton;
+    private Button productsButton;
 
     @FXML
-    private MenuItem openProducts;
+    private Button customersButton;
 
     @FXML
-    private MenuItem openCustomers;
+    private Button ordersButton;
 
     @FXML
-    private MenuItem openOrders;
+    private Button aboutButton;
 
     @FXML
-    private MenuItem openAboutUs;
-
-    @FXML
-    private MenuItem openProdfile;
-
-    @FXML
-    private MenuItem exitButton;
+    private Button exitButton;
 
     @FXML
     private AnchorPane viewPane;
@@ -57,21 +51,17 @@ public class MenuBarController {
      */
     @FXML
     public void clickButtons() {
-        mainpageButton.setOnAction(event -> showAnotherPage("main"));
-
-        closeButton.setOnAction(event -> exit());
-
-        openProducts.setOnAction(event -> showAnotherPage("products"));
-
-        openCustomers.setOnAction(event -> showAnotherPage("customers"));
-
-        openOrders.setOnAction(event -> showAnotherPage("orders"));
-
-        openAboutUs.setOnAction(event -> showAnotherPage("about"));
+        mainButton.setOnAction(event -> showAnotherPage("main"));
 
         exitButton.setOnAction(event -> exit());
 
-        openProdfile.setOnAction(event -> exit());
+        productsButton.setOnAction(event -> showAnotherPage("products"));
+
+        customersButton.setOnAction(event -> showAnotherPage("customers"));
+
+        ordersButton.setOnAction(event -> showAnotherPage("orders"));
+
+        aboutButton.setOnAction(event -> showAnotherPage("about"));
     }
 
     /**
