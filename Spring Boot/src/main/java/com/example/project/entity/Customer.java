@@ -24,6 +24,6 @@ public class Customer {
 
     private String address;
 
-    @OneToMany (mappedBy="customer", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="customer", fetch=FetchType.EAGER)
     private Collection<Order> orders;
 }

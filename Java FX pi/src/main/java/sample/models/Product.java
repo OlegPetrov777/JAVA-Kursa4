@@ -9,93 +9,74 @@ import java.util.Map;
 
 public class Product implements APIModel {
 
-    private final StringProperty price;
-    private final StringProperty color;
-    private final StringProperty count;
-    private final StringProperty model;
-    private final StringProperty orders;
+    private IntegerProperty id;
+    private StringProperty model;
+    private StringProperty price;
+    private StringProperty color;
+    private StringProperty count;
 
-    private final LongProperty id;
 
     public Product() {
         this(null, null, null, null, null);
     }
 
 
-    public Product(String price, String color, String count, String model, String orders, Long id) {
+    public Product(Integer id, String model, String price, String color, String count) {
+        this.id = new SimpleIntegerProperty(id);
+        this.model = new SimpleStringProperty(model);
         this.price = new SimpleStringProperty(price);
         this.color = new SimpleStringProperty(color);
         this.count = new SimpleStringProperty(count);
-        this.model = new SimpleStringProperty(model);
-        this.orders = new SimpleStringProperty(orders);
-        this.id = new SimpleLongProperty(id);
     }
 
-    public Product(String price, String color, String count, String model, String orders) {
-        this.price = new SimpleStringProperty(price);
-        this.color = new SimpleStringProperty(color);
-        this.count = new SimpleStringProperty(count);
-        this.model = new SimpleStringProperty(model);
-        this.orders = new SimpleStringProperty(orders);
-        this.id = null;
-    }
 
     @Override
     public String toJson() {
         Map<String, String> map = new HashMap<>();
-        map.put("firstName", price.get());
-        map.put("lastName", color.get());
-        map.put("street", count.get());
-        map.put("postalCode", String.valueOf(model.get()));
-        map.put("city", orders.get());
+        map.put("model", model.get());
+        map.put("price", price.get());
+        map.put("color", color.get());
+        map.put("count", count.get());
 
         Gson gson = new Gson();
         return gson.toJson(map);
     }
 
     /* Getters */
-
-    public long getId() {
+    public Integer getId() {
         return id.get();
-    }
-
-    public String getColor() {
-        return color.get();
-    }
-    public StringProperty getColorProperty() {
-        return color;
-    }
-
-    public String getCount() {
-        return count.get();
-    }
-    public StringProperty getCountProperty() {
-        return count;
-    }
-
-    public String getPrice() {
-        return price.get();
-    }
-    public StringProperty getPriceProperty() {
-        return price;
     }
 
     public String getModel() {
         return model.get();
     }
-    public StringProperty getModelProperty() {
-        return model;
+
+    public String getPrice() {
+        return price.get();
     }
 
-    public String getOrders() {
-        return orders.get();
+    public String getColor() {
+        return color.get();
     }
-    public StringProperty getOrderProperty() {
-        return orders;
+
+    public String getCount() {
+        return count.get();
     }
 
 
     /* Setters */
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
+
+    public void setModel(String model) {
+        this.model = new SimpleStringProperty(model);
+    }
+
+    public void setPrice(String price) {
+        this.price.set(price);
+    }
+
     public void setColor(String color) {
         this.color.set(color);
     }
@@ -103,17 +84,4 @@ public class Product implements APIModel {
     public void setCount(String count) {
         this.count.set(count);
     }
-
-    public void setPrice(String price) {
-        this.price.set(price);
-    }
-
-    public void setModel(String model) {
-        this.model.set(model);
-    }
-
-    public void setOrders(String orders) {
-        this.orders.set(orders);
-    }
-
 }

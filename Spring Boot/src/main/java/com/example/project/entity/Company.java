@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Company {
 
     private String name;
 
-    @OneToMany (mappedBy="company", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
+    @JsonIgnore
     private Collection<Model> models;
 }

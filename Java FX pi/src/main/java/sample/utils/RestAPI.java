@@ -1,94 +1,106 @@
 package sample.utils;
 
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import sample.models.Model;
 import sample.models.Product;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class RestAPI {
-    private static final String ServerURL = "http://localhost:8080/";
+    private static final String ServerURL = "http://localhost:8090/api/";
 
 
-    public void createProduct(Product product) {
-        HttpClass.PostRequest(ServerURL + "product/", product.toJson());
-    }
-/*
 
-    public void updatePlace(Product product) {
-        String id = product.getId();
-        String jsonString = product.toJson();
-        HttpClass.PutRequest(ServerURL + "areas/" + id, jsonString);
+    public void CreateProduct(Product product) {
+        HttpClass.PostRequest(ServerURL + "product", product.toJson());
     }
 
-    public boolean deletePlace(Product product) {
-        String id = product.getId();
-        if (id == null)
-            return false;
-        return HttpClass.DeleteRequest(ServerURL + "areas/" + id);
+    public List<Product> GetProduct() {
+        List<Product> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "product");
+
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        System.out.println(jsonResult);
+
+        for (int i = 0; i < jsonResult.size(); i++) {
+            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+
+            Integer id = currentPerson.get("id").getAsInt();
+            String model = currentPerson.get("model").getAsJsonObject().get("name").getAsString();
+            String price = currentPerson.get("price").getAsString();
+            String color = currentPerson.get("color").getAsString();
+            String count = currentPerson.get("count").getAsString();
+
+            Product product = new Product(id, model, price, color, count);
+            result.add(product);
+        }
+        return result;
     }
 
-    public void createClass(Classes class_) {
-        HttpClass.PostRequest(ServerURL + "activities/", class_.toJson());
+
+    public List<Model> GetModel() {
+        List<Model> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "model");
+
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        System.out.println(jsonResult);
+        for (int i = 0; i < jsonResult.size(); i++) {
+            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+
+            Integer id = currentPerson.get("id").getAsInt();
+            String name = currentPerson.get("name").getAsString();
+            String category = currentPerson.get("category").getAsJsonObject().get("name").getAsString();
+            String company = currentPerson.get("company").getAsJsonObject().get("name").getAsString();
+
+            Model model = new Model(id, name, category, company);
+            result.add(model);
+        }
+        return result;
     }
 
-    public void updateClass(Classes class_) {
-        String id = class_.getId();
-        String jsonString = class_.toJson();
-        HttpClass.PutRequest(ServerURL + "activities/" + id, jsonString);
+    public List<Model> GetCategory() {
+        List<Model> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "category");
+
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        System.out.println(jsonResult);
+        for (int i = 0; i < jsonResult.size(); i++) {
+            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+
+            Integer id = currentPerson.get("id").getAsInt();
+            String name = currentPerson.get("name").getAsString();
+            String category = currentPerson.get("category").getAsJsonObject().get("name").getAsString();
+            String company = currentPerson.get("company").getAsJsonObject().get("name").getAsString();
+
+            Model model = new Model(id, name, category, company);
+            result.add(model);
+        }
+        return result;
     }
 
-    public boolean deleteClass(Classes class_) {
-        String id = class_.getId();
-        if (id == null)
-            return false;
-        return HttpClass.DeleteRequest(ServerURL + "activities/" + id);
-    }
+    public List<Model> GetCompany() {
+        List<Model> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "company");
 
-    public void createClient(Clients client) {
-        HttpClass.PostRequest(ServerURL + "clients/", client.toJson());
-    }
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        System.out.println(jsonResult);
+        for (int i = 0; i < jsonResult.size(); i++) {
+            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
 
-    public void updateClient(Clients client) {
-        String id = client.getId();
-        String jsonString = client.toJson();
-        HttpClass.PutRequest(ServerURL + "clients/" + id, jsonString);
-    }
+            Integer id = currentPerson.get("id").getAsInt();
+            String name = currentPerson.get("name").getAsString();
+            String category = currentPerson.get("category").getAsJsonObject().get("name").getAsString();
+            String company = currentPerson.get("company").getAsJsonObject().get("name").getAsString();
 
-    public boolean deleteClient(Clients client) {
-        String id = client.getId();
-        if (id == null)
-            return false;
-        return HttpClass.DeleteRequest(ServerURL + "clients/" + id);
+            Model model = new Model(id, name, category, company);
+            result.add(model);
+        }
+        return result;
     }
-
-    public void createTrainer(Trainers trainer) {
-        HttpClass.PostRequest(ServerURL + "trainers/", trainer.toJson());
-    }
-
-    public void updateTrainer(Trainers trainer) {
-        String id = trainer.getId();
-        String jsonString = trainer.toJson();
-        HttpClass.PutRequest(ServerURL + "trainers/" + id, jsonString);
-    }
-
-    public boolean deleteTrainer(Trainers trainer) {
-        String id = trainer.getId();
-        if (id == null)
-            return false;
-        return HttpClass.DeleteRequest(ServerURL + "trainers/" + id);
-    }
-
-    public void createSubscription(Subscriptions subscription) {
-        HttpClass.PostRequest(ServerURL + "subscriptions/", subscription.toJson());
-    }
-
-    public void updateSubscription(Subscriptions subscription) {
-        String id = subscription.getId();
-        String jsonString = subscription.toJson();
-        HttpClass.PutRequest(ServerURL + "subscriptions/" + id, jsonString);
-    }
-
-    public boolean deleteSubscription(Subscriptions subscription) {
-        String id = subscription.getId();
-        if (id == null)
-            return false;
-        return HttpClass.DeleteRequest(ServerURL + "subscriptions/" + id);
-    } */
 }

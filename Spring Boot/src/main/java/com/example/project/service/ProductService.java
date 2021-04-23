@@ -14,8 +14,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void create(Product manufacturer){
-        productRepository.save(manufacturer);
+    public void create(Product product){
+        productRepository.save(product);
     }
 
     public List<Product> findAll(){

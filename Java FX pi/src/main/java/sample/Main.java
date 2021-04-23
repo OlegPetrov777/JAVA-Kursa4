@@ -30,7 +30,7 @@ public class Main extends Application {
      */
     public void showLoginPage() {
         try {
-            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/views/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/views/Login.fxml"));
             Parent root = loader.load();
 
             primaryStage.setScene(new Scene(root));

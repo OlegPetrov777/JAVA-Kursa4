@@ -43,7 +43,7 @@ public class MenuBarController {
      */
     @FXML
     void initialize() {
-        showAnotherPage("main");
+        showAnotherPage("MainPage");
     }
 
     /**
@@ -51,17 +51,17 @@ public class MenuBarController {
      */
     @FXML
     public void clickButtons() {
-        mainButton.setOnAction(event -> showAnotherPage("main"));
+        mainButton.setOnAction(event -> showAnotherPage("MainPage"));
 
         exitButton.setOnAction(event -> exit());
 
-        productsButton.setOnAction(event -> showAnotherPage("products"));
+        productsButton.setOnAction(event -> showAnotherPage("Products/Products"));
 
-        customersButton.setOnAction(event -> showAnotherPage("customers"));
+        customersButton.setOnAction(event -> showAnotherPage("Customers"));
 
-        ordersButton.setOnAction(event -> showAnotherPage("orders"));
+        ordersButton.setOnAction(event -> showAnotherPage("Orders"));
 
-        aboutButton.setOnAction(event -> showAnotherPage("about"));
+        aboutButton.setOnAction(event -> showAnotherPage("About"));
     }
 
     /**
@@ -88,7 +88,7 @@ public class MenuBarController {
         try {
             primaryStage.setTitle("GreensPark APP");
 
-            FXMLLoader loader = new FXMLLoader(MenuBarController.class.getResource("/views/menuBar.fxml"));
+            FXMLLoader loader = new FXMLLoader(MenuBarController.class.getResource("/views/MenuBar.fxml"));
 
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));

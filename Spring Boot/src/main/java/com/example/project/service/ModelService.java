@@ -14,8 +14,8 @@ public class ModelService {
     @Autowired
     private ModelRepository modelRepository;
 
-    public void create(Model manufacturer){
-        modelRepository.save(manufacturer);
+    public void create(Model model){
+        modelRepository.save(model);
     }
 
     public List<Model> findAll(){

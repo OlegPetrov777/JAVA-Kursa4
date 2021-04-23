@@ -22,15 +22,15 @@ public class Order {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date_of_ready;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="customer_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="customer_id")
     private Customer customer;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="employee_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="employee_id")
     private Employee employee;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="product_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="product_id")
     private Product product;
 }

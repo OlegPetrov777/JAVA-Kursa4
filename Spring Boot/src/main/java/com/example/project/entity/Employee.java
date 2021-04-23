@@ -25,6 +25,6 @@ public class Employee {
 
     private boolean admin_status;
 
-    @OneToMany (mappedBy="employee", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="employee", fetch=FetchType.EAGER)
     private Collection<Order> orders;
 }

@@ -1,5 +1,7 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -17,14 +19,15 @@ public class Model {
 
     private String name;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="category_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="category_id")
     private Category category;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="company_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="company_id")
     private Company company;
 
-    @OneToMany (mappedBy="model", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="model", fetch=FetchType.EAGER)
+    @JsonIgnore
     private Collection<Product> products;
 }

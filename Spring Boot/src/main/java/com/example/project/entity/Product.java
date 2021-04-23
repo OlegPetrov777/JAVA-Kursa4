@@ -21,10 +21,10 @@ public class Product {
 
     private int count;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="model_id")
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+    @JoinColumn(name="model_id")
     private Model model;
 
-    @OneToMany (mappedBy="product", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="product", fetch=FetchType.EAGER)
     private Collection<Order> orders;
 }
