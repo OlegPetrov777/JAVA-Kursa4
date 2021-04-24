@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.entity.Category;
+import com.example.project.entity.Product;
 import com.example.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,13 @@ public class CategoryController {
         return category.isPresent()
                 ? new ResponseEntity<>(category, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/api/category/{id}")
+    public ResponseEntity<List<Category>> update(@RequestBody Category category) {
+        final List<Category> categoryList = categoryService.update(category);
+
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/api/category/{id}")

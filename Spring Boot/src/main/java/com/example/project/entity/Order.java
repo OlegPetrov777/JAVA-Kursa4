@@ -26,9 +26,9 @@ public class Order {
     @JoinColumn(name="customer_id")
     private Customer customer;
 
-    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
-    @JoinColumn(name="employee_id")
-    private Employee employee;
+//    @ManyToOne(optional=false, cascade=CascadeType.MERGE)
+//    @JoinColumn(name="employee_id")
+//    private Employee employee;
 
     @ManyToOne(optional=false, cascade=CascadeType.MERGE)
     @JoinColumn(name="product_id")

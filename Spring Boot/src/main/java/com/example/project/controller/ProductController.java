@@ -44,6 +44,13 @@ public class ProductController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/api/product/{id}")
+    public ResponseEntity<List<Product>> update(@RequestBody Product product) {
+        final List<Product> productList = productService.update(product);
+
+        return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/api/product/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         final Optional<Product> product = productService.find(id);

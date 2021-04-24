@@ -19,10 +19,15 @@ public class Category  implements APIModel {
         this(null, null);
     }
 
+    public Category(String name) {
+        this.name = new SimpleStringProperty(name);
+    }
+
     public Category(Integer id, String name) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
     }
+
 
     @Override
     public String toJson() {
@@ -33,9 +38,19 @@ public class Category  implements APIModel {
         return gson.toJson(map);
     }
 
+    @Override
+    public String toJsonPUT() {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", String.valueOf(getId()));
+        map.put("name", name.get());
+
+        Gson gson = new Gson();
+        return gson.toJson(map);
+    }
+
 
     /* Getters */
-    public int getId() {
+    public Integer getId() {
         return id.get();
     }
 
@@ -45,7 +60,7 @@ public class Category  implements APIModel {
 
 
     /* Setters */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id.set(id);
     }
 

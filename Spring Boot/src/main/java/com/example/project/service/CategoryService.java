@@ -18,13 +18,31 @@ public class CategoryService {
         categoryRepository.save(manufacturer);
     }
 
+
     public List<Category> findAll(){
         return categoryRepository.findAll();
     }
 
+
     public Optional<Category> find(Long id){
         return categoryRepository.findById(id);
     }
+
+
+    public List<Category> update(Category category) {
+        var updatedCategory = categoryRepository.findById(category.getId());
+
+        if (updatedCategory.isPresent()) {
+            var updatedCategory_ = updatedCategory.get();
+
+            updatedCategory_.setName(category.getName() != null
+                    ? category.getName() : updatedCategory_.getName());
+
+            categoryRepository.save(updatedCategory_);
+        }
+        return categoryRepository.findAll();
+    }
+
 
     public void delete(Long id){
         categoryRepository.deleteById(id);

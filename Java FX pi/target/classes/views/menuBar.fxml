@@ -42,6 +42,15 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
+                  <Button fx:id="techinfoButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="143.0" style="-fx-background-color: #1e5b48;" text="Technical info" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
                   <Button fx:id="aboutButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="222.0" style="-fx-background-color: #1e5b48;" text="About Us" textFill="#80b96b">
                      <font>
                         <Font size="18.0" />

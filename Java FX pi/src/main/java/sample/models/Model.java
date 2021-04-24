@@ -41,6 +41,11 @@ public class Model implements APIModel {
         return gson.toJson(map);
     }
 
+    @Override
+    public String toJsonPUT() {
+        return null;
+    }
+
     /* Getters */
     public int getId() {
         return id.get();

@@ -42,6 +42,11 @@ public class Product implements APIModel {
         return gson.toJson(map);
     }
 
+    @Override
+    public String toJsonPUT() {
+        return null;
+    }
+
     /* Getters */
     public Integer getId() {
         return id.get();

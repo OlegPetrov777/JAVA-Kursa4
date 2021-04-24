@@ -6,10 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.controllers.LoginController;
+import sample.utils.RestAPI;
+
 import java.io.IOException;
 
 public class Main extends Application {
     private Stage primaryStage;
+    public static RestAPI session = new RestAPI();
 
     public static void main(String[] args) {
         launch(args);

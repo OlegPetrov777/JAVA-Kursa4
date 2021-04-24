@@ -29,6 +29,9 @@ public class MenuBarController {
     private Button ordersButton;
 
     @FXML
+    private Button techinfoButton;
+
+    @FXML
     private Button aboutButton;
 
     @FXML
@@ -58,6 +61,8 @@ public class MenuBarController {
         productsButton.setOnAction(event -> showAnotherPage("Products/Products"));
 
         customersButton.setOnAction(event -> showAnotherPage("Customers"));
+
+        techinfoButton.setOnAction(event -> showAnotherPage("TechnicalInfo/TechnicalInfo"));
 
         ordersButton.setOnAction(event -> showAnotherPage("Orders"));
 

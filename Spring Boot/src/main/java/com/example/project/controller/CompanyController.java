@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
 import com.example.project.entity.Company;
 import com.example.project.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,13 @@ public class CompanyController {
         return company.isPresent()
                 ? new ResponseEntity<>(company, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/api/company/{id}")
+    public ResponseEntity<List<Company>> update(@RequestBody Company company) {
+        final List<Company> companyList = companyService.update(company);
+
+        return new ResponseEntity<>(companyList, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/api/company/{id}")

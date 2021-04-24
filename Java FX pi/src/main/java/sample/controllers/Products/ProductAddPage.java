@@ -40,8 +40,6 @@ public class ProductAddPage {
     @FXML
     void initialize() { clickButtons(); }
 
-    private RestAPI ApiSession = new RestAPI();
-
 
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */

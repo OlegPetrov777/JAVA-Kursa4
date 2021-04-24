@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sample.Main;
+import sample.controllers.MenuBarController;
 import sample.models.Model;
 import sample.models.Product;
 import sample.utils.RestAPI;
@@ -32,7 +34,7 @@ public class ProductsController {
     private TableColumn<Product, String> countColumn;
 
     @FXML
-    private ComboBox<Model> modelBox;
+    private ComboBox<String> modelBox;
 
     @FXML
     private Button newButton;
@@ -44,20 +46,35 @@ public class ProductsController {
     private Button deleteButton;
 
 
-    RestAPI session = new RestAPI();
-    ObservableList<Product> personData = FXCollections.observableArrayList();
+    ObservableList<Product> productData = FXCollections.observableArrayList();
     ObservableList<Model> modelData = FXCollections.observableArrayList();
+    ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
 
     @FXML
-    void initialize() {
+    public void initialize() {
         clickButtons();
         showTable();
         showColumn();
+        showComboBox();
+    }
 
+    private void showComboBox() {
         modelData.clear();
-        modelData.addAll(session.GetModel());
-        modelBox.setItems(modelData);
+        modelData.addAll(Main.session.GetModel());
+
+        modelNameData.clear();
+        for (Model model: modelData){
+            modelNameData.add(model.getName());
+        }
+        modelBox.setItems(modelNameData);
+    }
+
+    public void setCompany(Model model){
+        if (model.getName() != null){
+            modelBox.getSelectionModel().select(model.getName());
+            initialize();
+        }
     }
 
 
@@ -70,9 +87,19 @@ public class ProductsController {
     }
 
     private void showTable(){
-        personData.clear();
-        personData.addAll(session.GetProduct());
-        productsTable.setItems(personData);
+        productData.clear();
+        productData.addAll(Main.session.GetProduct());
+        productsTable.setItems(productData);
+    }
+
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(MenuBarController.primaryStage);
+        alert.setTitle("ОШИБКА");
+        alert.setHeaderText("Пользователи не выбраны");
+        alert.setContentText("Пожалуйста, выберите пользователя");
+
+        alert.showAndWait();
     }
 
 
@@ -84,18 +111,35 @@ public class ProductsController {
 
         /* НАЖАТИЕ НА КНОПКУ NEW */
         newButton.setOnAction(event -> {
-//            Product product = new Product();
-//            ProductAddPage.showProductAddPage();
+            Product product = new Product();
+            ProductAddPage.showProductAddPage();
         });
 
         /* НАЖАТИЕ НА КНОПКУ EDIT */
         editButton.setOnAction(event -> {
+            int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 
+            if (selectedIndex >= 0) {
+                Product product = productsTable.getItems().get(selectedIndex);
+                ProductEditPage.showProductEditPage(product);
+            } else
+                showAlert();
         });
+
 
         /* НАЖАТИЕ НА КНОПКУ DELETE */
         deleteButton.setOnAction(event -> {
+            int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 
+            if (selectedIndex >= 0) {
+                Product currentPerson = productsTable.getItems().get(selectedIndex);
+
+                if (Main.session.DeleteProduct(currentPerson))
+                    productsTable.getItems().remove(selectedIndex);
+
+            } else
+                showAlert();
         });
     }
+
 }

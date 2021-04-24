@@ -26,6 +26,20 @@ public class CompanyService {
         return companyRepository.findById(id);
     }
 
+    public List<Company> update(Company company) {
+        var updatedCompany = companyRepository.findById(company.getId());
+
+        if (updatedCompany.isPresent()) {
+            var updatedCompany_ = updatedCompany.get();
+
+            updatedCompany_.setName(company.getName() != null
+                    ? company.getName() : updatedCompany_.getName());
+
+            companyRepository.save(updatedCompany_);
+        }
+        return companyRepository.findAll();
+    }
+
     public void delete(Long id){
         companyRepository.deleteById(id);
     }

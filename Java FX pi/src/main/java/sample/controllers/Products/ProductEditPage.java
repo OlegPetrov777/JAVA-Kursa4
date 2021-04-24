@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.Main;
 import sample.controllers.MenuBarController;
 import sample.models.Product;
 import sample.utils.RestAPI;
@@ -30,7 +31,7 @@ public class ProductEditPage {
     private TextField countField;
 
     @FXML
-    private TextField modelField;
+    private Label modelLabel;
 
     @FXML
     private Button okButton;
@@ -38,8 +39,7 @@ public class ProductEditPage {
     @FXML
     private Button cancelButton;
 
-    private RestAPI ApiSession = new RestAPI();
-    private Product product;
+    private Product product = new Product();
 
     @FXML
     void initialize() {
@@ -50,20 +50,29 @@ public class ProductEditPage {
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
+            if (isInputValid()) {
+                product.setPrice(priceField.getText());
+                product.setColor(colorField.getText());
+                product.setCount(countField.getText());
 
+                // Обновляем модель
+                Main.session.UpdateProduct(product);
+
+                // Close window
+                cancelButton.getScene().getWindow().hide();
+            }
         });
 
         /* НАЖАТИЕ НА КНОПКУ CANCEL */
         cancelButton.setOnAction(event -> {
             cancelButton.getScene().getWindow().hide();
         });
-
     }
 
 
     public void setProduct(Product product) {
         this.product = product;
-        modelField.setText(product.getModel());
+        modelLabel.setText(product.getModel());
         priceField.setText(product.getPrice());
         colorField.setText(product.getColor());
         countField.setText(product.getCount());
@@ -72,10 +81,10 @@ public class ProductEditPage {
 
     private boolean isInputValid() {
         String errorMessage = "";
-        if (modelField.getText() == null || modelField.getText().length() == 0) {
-            errorMessage += "Error: modelField";
-        }
-        else if (priceField.getText() == null || priceField.getText().length() == 0) {
+//        if (modelField.getText() == null || modelField.getText().length() == 0) {
+//            errorMessage += "Error: modelField";
+//        }
+        /*else*/ if (priceField.getText() == null || priceField.getText().length() == 0) {
             errorMessage += "Error: priceField";
         }
         else if (colorField.getText() == null || colorField.getText().length() == 0) {
@@ -102,6 +111,7 @@ public class ProductEditPage {
 
             Stage dialogueStage = new Stage();
             dialogueStage.setTitle("Edit Product");
+
             dialogueStage.initOwner(MenuBarController.primaryStage);
             dialogueStage.initModality(Modality.WINDOW_MODAL);
 
@@ -115,7 +125,7 @@ public class ProductEditPage {
             ProductEditPage controller = loader.getController();
             controller.setProduct(product);
 
-            dialogueStage.showAndWait();
+            dialogueStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
