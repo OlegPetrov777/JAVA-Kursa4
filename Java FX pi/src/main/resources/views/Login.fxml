@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #1e5b48;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LoginController">
+   <children>
+      <AnchorPane layoutY="-21.0" prefHeight="555.0" prefWidth="1000.0" style="-fx-background-color: #5e8e73;" AnchorPane.bottomAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="350.0" layoutY="152.0" prefHeight="250.0" prefWidth="300.0" style="-fx-border-color: #0f561f; -fx-background-color: #167557;" AnchorPane.bottomAnchor="152.80000000000007">
+               <children>
+                  <TextField fx:id="loginTextField" layoutX="50.0" layoutY="94.0" prefHeight="26.0" prefWidth="200.0" promptText="login">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="142.0" prefHeight="26.0" prefWidth="200.0" promptText="password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <Label layoutX="54.0" layoutY="25.0" text="Authorization" textAlignment="CENTER" textFill="#e2ffa0">
+                     <font>
+                        <Font name="Impact" size="35.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="loginButton" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #80b96b;" text="Sign In" textAlignment="CENTER" textFill="#060800">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="alarmLabel" layoutX="75.0" layoutY="69.0" textAlignment="CENTER" textFill="RED">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="398.0" layoutY="-3.0" text="GREENSPARK" textAlignment="CENTER" textFill="#80b96b" AnchorPane.leftAnchor="398.0" AnchorPane.topAnchor="-3.0">
+         <font>
+            <Font name="Impact" size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitButton" layoutX="931.0" layoutY="5.0" mnemonicParsing="false" style="-fx-background-color: #80b96b;" text="EXIT">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

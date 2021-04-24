@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #1e5b48;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MenuBarController">
+   <top>
+      <HBox prefHeight="42.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="mainButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="167.0" style="-fx-background-color: #1e5b48;" text="Main" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="productsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="171.0" style="-fx-background-color: #1e5b48;" text="Products" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="customersButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="190.0" style="-fx-background-color: #1e5b48;" text="Customers" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="ordersButton" mnemonicParsing="false" prefHeight="92.0" prefWidth="168.0" style="-fx-background-color: #1e5b48;" text="Orders" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="techinfoButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="143.0" style="-fx-background-color: #1e5b48;" text="Technical info" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="aboutButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="222.0" style="-fx-background-color: #1e5b48;" text="About Us" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: #1e5b48;" text="EXIT" textFill="#80b96b">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane fx:id="viewPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #415138;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
