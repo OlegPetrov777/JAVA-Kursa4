@@ -8,9 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.models.Model;
+import sample.models.ModelTable;
 import sample.models.Product;
-import sample.utils.RestAPI;
 
 
 public class ProductsController {
@@ -47,7 +46,7 @@ public class ProductsController {
 
 
     ObservableList<Product> productData = FXCollections.observableArrayList();
-    ObservableList<Model> modelData = FXCollections.observableArrayList();
+    ObservableList<ModelTable> modelTableData = FXCollections.observableArrayList();
     ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
 
@@ -60,19 +59,19 @@ public class ProductsController {
     }
 
     private void showComboBox() {
-        modelData.clear();
-        modelData.addAll(Main.session.GetModel());
+        modelTableData.clear();
+        modelTableData.addAll(Main.session.GetModel());
 
         modelNameData.clear();
-        for (Model model: modelData){
-            modelNameData.add(model.getName());
+        for (ModelTable modelTable : modelTableData){
+            modelNameData.add(modelTable.getName());
         }
         modelBox.setItems(modelNameData);
     }
 
-    public void setCompany(Model model){
-        if (model.getName() != null){
-            modelBox.getSelectionModel().select(model.getName());
+    public void setCompany(ModelTable modelTable){
+        if (modelTable.getName() != null){
+            modelBox.getSelectionModel().select(modelTable.getName());
             initialize();
         }
     }
@@ -111,7 +110,6 @@ public class ProductsController {
 
         /* НАЖАТИЕ НА КНОПКУ NEW */
         newButton.setOnAction(event -> {
-            Product product = new Product();
             ProductAddPage.showProductAddPage();
         });
 

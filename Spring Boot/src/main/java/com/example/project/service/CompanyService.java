@@ -14,17 +14,25 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    public void create(Company manufacturer){
-        companyRepository.save(manufacturer);
+    public void create(Company company){
+        companyRepository.save(company);
     }
+
 
     public List<Company> findAll(){
         return companyRepository.findAll();
     }
 
+
     public Optional<Company> find(Long id){
         return companyRepository.findById(id);
     }
+
+
+    public List<Company> findByName(String name){
+        return companyRepository.findByName(name);
+    }
+
 
     public List<Company> update(Company company) {
         var updatedCompany = companyRepository.findById(company.getId());
@@ -39,6 +47,7 @@ public class CompanyService {
         }
         return companyRepository.findAll();
     }
+
 
     public void delete(Long id){
         companyRepository.deleteById(id);

@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import sample.models.Category;
 import sample.models.Company;
-import sample.models.Model;
+import sample.models.ModelTable;
 import sample.models.Product;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class RestAPI {
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
         for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+            JsonObject currentProduct = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentPerson.get("id").getAsInt();
-            String model = currentPerson.get("model").getAsJsonObject().get("name").getAsString();
-            String price = currentPerson.get("price").getAsString();
-            String color = currentPerson.get("color").getAsString();
-            String count = currentPerson.get("count").getAsString();
+            Integer id = currentProduct.get("id").getAsInt();
+            String model = currentProduct.get("model").getAsJsonObject().get("name").getAsString();
+            String price = currentProduct.get("price").getAsString();
+            String color = currentProduct.get("color").getAsString();
+            String count = currentProduct.get("count").getAsString();
 
             Product product = new Product(id, model, price, color, count);
             result.add(product);
@@ -56,23 +56,40 @@ public class RestAPI {
 
 
 
-    public List<Model> GetModel() {
-        List<Model> result = new ArrayList<>();
+    public List<ModelTable> GetModel() {
+        List<ModelTable> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/model");
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
         for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+            JsonObject currentModel = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentPerson.get("id").getAsInt();
-            String name = currentPerson.get("name").getAsString();
-            String category = currentPerson.get("category").getAsJsonObject().get("name").getAsString();
-            String company = currentPerson.get("company").getAsJsonObject().get("name").getAsString();
+            Integer id = currentModel.get("id").getAsInt();
+            String name = currentModel.get("name").getAsString();
+            String category = currentModel.get("category").getAsJsonObject().get("name").getAsString();
+            String company = currentModel.get("company").getAsJsonObject().get("name").getAsString();
 
-            Model model = new Model(id, name, category, company);
-            result.add(model);
+            ModelTable modelTable = new ModelTable(id, name, category, company);
+            result.add(modelTable);
         }
         return result;
+    }
+
+    public void CreateModel(ModelTable modelTable) {
+        System.out.println(modelTable.toJson());
+        HttpClass.PostRequest(ServerURL + "/model", modelTable.toJson());
+    }
+
+    public void UpdateModel(ModelTable modelTable) {
+        Integer id = modelTable.getId();
+        String jsonString = modelTable.toJsonPUT();
+
+        HttpClass.PutRequest(ServerURL + "/model/" + id, jsonString);
+    }
+
+    public boolean DeleteModel(ModelTable modelTable) {
+        Integer id = modelTable.getId();
+        return HttpClass.DeleteRequest(ServerURL + "/model/" + id);
     }
 
 
@@ -85,10 +102,10 @@ public class RestAPI {
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
         for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+            JsonObject currentCategory = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentPerson.get("id").getAsInt();
-            String name = currentPerson.get("name").getAsString();
+            Integer id = currentCategory.get("id").getAsInt();
+            String name = currentCategory.get("name").getAsString();
 
             Category category = new Category(id, name);
             result.add(category);
@@ -121,13 +138,47 @@ public class RestAPI {
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
         for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentPerson = jsonResult.get(i).getAsJsonObject();
+            JsonObject currentCompany = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentPerson.get("id").getAsInt();
-            String name = currentPerson.get("name").getAsString();
+            Integer id = currentCompany.get("id").getAsInt();
+            String name = currentCompany.get("name").getAsString();
 
             Company company = new Company(id, name);
             result.add(company);
+        }
+        return result;
+    }
+
+    public Company GetCompaniesById(Integer id) {
+        String buffer = HttpClass.GetRequest(ServerURL + "/company/" + id);
+
+        JsonObject currentCompany = JsonParser.parseString(buffer).getAsJsonObject();
+
+        if (currentCompany != null){
+
+            String name = currentCompany.get("name").getAsString();
+
+            return new Company(id, name);
+        } else
+            return null;
+    }
+
+    public List<String> GetCompaniesByName(String name) {
+        List<String> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "/company/name_" + name);
+
+        if (buffer != null) {
+            JsonArray jsonAnswer = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonAnswer.size(); i++) {
+                JsonObject currentCompany = jsonAnswer.get(i).getAsJsonObject();
+
+                Integer id = currentCompany.get("id").getAsInt();
+
+                Company company = new Company(id, name);
+
+                result.add(company.toJsonPUT());
+            }
         }
         return result;
     }

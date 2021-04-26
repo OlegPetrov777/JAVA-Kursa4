@@ -1,6 +1,5 @@
 package sample.controllers.TechnicalInfo;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,22 +14,23 @@ import sample.controllers.TechnicalInfo.Category.CategoryAddPage;
 import sample.controllers.TechnicalInfo.Category.CategoryEditPage;
 import sample.controllers.TechnicalInfo.Company.CompanyAddPage;
 import sample.controllers.TechnicalInfo.Company.CompanyEditPage;
+import sample.controllers.TechnicalInfo.Model.ModelAddPage;
 import sample.models.Category;
 import sample.models.Company;
-import sample.models.Model;
+import sample.models.ModelTable;
 
 
 public class TechnicalInfoController {
 
 
     @FXML
-    private TableView<Model> modelTable;
+    private TableView<ModelTable> modelTable;
 
     @FXML
-    private TableColumn<Model, String> modelID;
+    private TableColumn<ModelTable, String> modelID;
 
     @FXML
-    private TableColumn<Model, String> nameModel;
+    private TableColumn<ModelTable, String> nameModel;
 
     @FXML
     private TableView<Company> companyTable;
@@ -80,10 +80,9 @@ public class TechnicalInfoController {
     @FXML
     private Button updateButton;
 
-
     ObservableList<Category> categoryData = FXCollections.observableArrayList();
-    ObservableList<Model> modelData = FXCollections.observableArrayList();
-    ObservableList<Company> companyNameData = FXCollections.observableArrayList();
+    ObservableList<ModelTable> modelTableData = FXCollections.observableArrayList();
+    ObservableList<Company> companyData = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -91,69 +90,6 @@ public class TechnicalInfoController {
         showColumns();
         clickButtons();
     }
-
-    @FXML
-    public void clickButtons() {
-        updateButton.setOnAction(event -> {
-            showTables();
-            showColumns();
-        });
-
-
-        NewCompanyBut.setOnAction(event -> {
-            CompanyAddPage.showCompanyAddPage();
-        });
-
-        EditCompanyBut.setOnAction(event -> {
-            int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
-
-            if (selectedIndex >= 0) {
-                Company company = companyTable.getItems().get(selectedIndex);
-                CompanyEditPage.showCompanyEditPage(company);
-            } else
-                showAlert();
-        });
-
-        DeleteCompanyBut.setOnAction(event -> {
-            int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
-
-            if (selectedIndex >= 0) {
-                Company currentCompany = companyTable.getItems().get(selectedIndex);
-
-                if (Main.session.DeleteCompany(currentCompany))
-                    companyTable.getItems().remove(selectedIndex);
-            } else
-                showAlert();
-        });
-
-
-        NewCategoryBut.setOnAction(event -> {
-            CategoryAddPage.showCategoryAddPage();
-        });
-
-        EditCategoryBut.setOnAction(event -> {
-            int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
-
-            if (selectedIndex >= 0) {
-                Category category = categoryTable.getItems().get(selectedIndex);
-                CategoryEditPage.showCategoryEditPage(category);
-            } else
-                showAlert();
-        });
-
-        DeleteCategoryBut.setOnAction(event -> {
-            int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
-
-            if (selectedIndex >= 0) {
-                Category currentCategory = categoryTable.getItems().get(selectedIndex);
-
-                if (Main.session.DeleteCategory(currentCategory))
-                    categoryTable.getItems().remove(selectedIndex);
-            } else
-                showAlert();
-        });
-    }
-
 
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -172,14 +108,14 @@ public class TechnicalInfoController {
         categoryTable.setItems(categoryData);
 
         /* COMPANY */
-        companyNameData.clear();
-        companyNameData.addAll(Main.session.GetCompany());
-        companyTable.setItems(companyNameData);
+        companyData.clear();
+        companyData.addAll(Main.session.GetCompany());
+        companyTable.setItems(companyData);
 
         /* MODEL */
-        modelData.clear();
-        modelData.addAll(Main.session.GetModel());
-        modelTable.setItems(modelData);
+        modelTableData.clear();
+        modelTableData.addAll(Main.session.GetModel());
+        modelTable.setItems(modelTableData);
     }
 
     private void showColumns() {
@@ -194,5 +130,91 @@ public class TechnicalInfoController {
         /* MODEL */
         modelID.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameModel.setCellValueFactory(new PropertyValueFactory<>("name"));
+    }
+
+    @FXML
+    public void clickButtons() {
+
+        updateButton.setOnAction(event -> {
+            showTables();
+            showColumns();
+        });
+
+
+        NewModelBut.setOnAction(event -> ModelAddPage.showModelAddPage());
+
+        EditModelBut.setOnAction(event -> {
+            int selectedIndex = modelTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                ModelTable currentModelTable = modelTable.getItems().get(selectedIndex);
+                //ModelEditPage.showModelEditPage(currentModel);
+            } else
+                showAlert();
+        });
+
+        DeleteModelBut.setOnAction(event -> {
+            int selectedIndex = modelTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                ModelTable currentModelTable = modelTable.getItems().get(selectedIndex);
+
+                if (Main.session.DeleteModel(currentModelTable))
+                    modelTable.getItems().remove(selectedIndex);
+            } else
+                showAlert();
+        });
+
+
+
+        NewCompanyBut.setOnAction(event -> CompanyAddPage.showCompanyAddPage());
+
+        EditCompanyBut.setOnAction(event -> {
+            int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                Company currentCompany = companyTable.getItems().get(selectedIndex);
+                CompanyEditPage.showCompanyEditPage(currentCompany);
+            } else
+                showAlert();
+        });
+
+        DeleteCompanyBut.setOnAction(event -> {
+            int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                Company currentCompany = companyTable.getItems().get(selectedIndex);
+
+                if (Main.session.DeleteCompany(currentCompany))
+                    companyTable.getItems().remove(selectedIndex);
+            } else
+                showAlert();
+        });
+
+
+
+        NewCategoryBut.setOnAction(event -> CategoryAddPage.showCategoryAddPage());
+
+        EditCategoryBut.setOnAction(event -> {
+            int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                Category currentCategory = categoryTable.getItems().get(selectedIndex);
+                CategoryEditPage.showCategoryEditPage(currentCategory);
+            } else
+                showAlert();
+        });
+
+        DeleteCategoryBut.setOnAction(event -> {
+            int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                Category currentCategory = categoryTable.getItems().get(selectedIndex);
+
+                if (Main.session.DeleteCategory(currentCategory))
+                    categoryTable.getItems().remove(selectedIndex);
+            } else
+                showAlert();
+        });
     }
 }

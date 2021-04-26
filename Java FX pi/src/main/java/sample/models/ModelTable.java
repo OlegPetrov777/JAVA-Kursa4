@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Model implements APIModel {
+public class ModelTable implements APIModel {
 
     private IntegerProperty id;
     private StringProperty name;
@@ -17,12 +17,17 @@ public class Model implements APIModel {
     private StringProperty company;
 
 
-    public Model() {
+    public ModelTable() {
         this(null, null, null, null);
     }
 
+    public ModelTable(String name, String category, String company) {
+        this.name = new SimpleStringProperty(name);
+        this.category = new SimpleStringProperty(category);
+        this.company = new SimpleStringProperty(company);
+    }
 
-    public Model(Integer id, String name, String category, String company) {
+    public ModelTable(Integer id, String name, String category, String company) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.category = new SimpleStringProperty(category);
@@ -47,7 +52,7 @@ public class Model implements APIModel {
     }
 
     /* Getters */
-    public int getId() {
+    public Integer getId() {
         return id.get();
     }
 
@@ -65,7 +70,7 @@ public class Model implements APIModel {
 
 
     /* Setters */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id.set(id);
     }
 

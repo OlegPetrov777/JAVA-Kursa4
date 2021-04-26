@@ -71,7 +71,7 @@ public class CompanyAddPage {
             dialogueStage.initModality(Modality.WINDOW_MODAL);
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ProductAddPage.class.getResource("/views/TechnicalInfo/Company/CompanyAddPage.fxml"));
+            loader.setLocation(CompanyAddPage.class.getResource("/views/TechnicalInfo/Company/CompanyAddPage.fxml"));
             Parent page = loader.load();
 
             Scene scene = new Scene(page);
