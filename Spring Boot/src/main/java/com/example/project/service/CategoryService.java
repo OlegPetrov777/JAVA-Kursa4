@@ -1,6 +1,7 @@
 package com.example.project.service;
 
 import com.example.project.entity.Category;
+import com.example.project.entity.Company;
 import com.example.project.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,12 @@ public class CategoryService {
     public Optional<Category> find(Long id){
         return categoryRepository.findById(id);
     }
+
+
+    public List<Category> findByName(String name){
+        return categoryRepository.findByName(name);
+    }
+
 
 
     public List<Category> update(Category category) {

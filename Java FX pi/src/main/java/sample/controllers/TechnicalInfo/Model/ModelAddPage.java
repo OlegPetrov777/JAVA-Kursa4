@@ -13,6 +13,7 @@ import sample.Main;
 import sample.controllers.MenuBarController;
 import sample.models.Category;
 import sample.models.Company;
+import sample.models.ModelCreate;
 import sample.models.ModelTable;
 
 import java.util.List;
@@ -77,14 +78,20 @@ public class ModelAddPage {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
-                List<String> list = Main.session.GetCompaniesByName(companyBox.getValue());
+                /* COMPANY */
+                List<Company> oneCompanyInList = Main.session.GetCompaniesByName(companyBox.getValue());
+                Company currentCompany = oneCompanyInList.get(0);
 
-                ModelTable modelTable = new ModelTable(nameField.getText(), list.get(0),"Tele");
+                /* CATEGORY */
+                List<Category> oneCategoryInList = Main.session.GetCategoryByName(categoryBox.getValue());
+                Category currentCategory = oneCategoryInList.get(0);
 
-                System.out.println(companyBox.getValue());
-                System.out.println(categoryBox.getValue());
+                System.out.println();
 
-                Main.session.CreateModel(modelTable);
+                /* MODEL */
+                ModelCreate modelCreate = new ModelCreate(nameField.getText(), currentCategory, currentCompany);
+
+                Main.session.CreateModel(modelCreate);
 
                 cancelButton.getScene().getWindow().hide();
             }

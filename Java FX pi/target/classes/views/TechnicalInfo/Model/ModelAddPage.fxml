@@ -7,7 +7,7 @@
 <AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #5e8e73;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.TechnicalInfo.Model.ModelAddPage">
     <children>
         <Label fx:id="errorLabel" layoutX="50.0" layoutY="61.0" text=" " textFill="RED" />
-        <Label layoutX="72.0" layoutY="14.0" text="ADD Model" textFill="#80b96b">
+        <Label layoutX="122.0" layoutY="14.0" text="ADD Model" textFill="#80b96b">
             <font>
                 <Font name="Impact" size="36.0" />
             </font></Label>

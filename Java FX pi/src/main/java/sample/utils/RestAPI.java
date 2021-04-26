@@ -4,10 +4,7 @@ package sample.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import sample.models.Category;
-import sample.models.Company;
-import sample.models.ModelTable;
-import sample.models.Product;
+import sample.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +63,8 @@ public class RestAPI {
 
             Integer id = currentModel.get("id").getAsInt();
             String name = currentModel.get("name").getAsString();
-            String category = currentModel.get("category").getAsJsonObject().get("name").getAsString();
-            String company = currentModel.get("company").getAsJsonObject().get("name").getAsString();
+            String category = currentModel.get("category").getAsJsonObject().get("id").getAsString();
+            String company = currentModel.get("company").getAsJsonObject().get("id").getAsString();
 
             ModelTable modelTable = new ModelTable(id, name, category, company);
             result.add(modelTable);
@@ -75,9 +72,8 @@ public class RestAPI {
         return result;
     }
 
-    public void CreateModel(ModelTable modelTable) {
-        System.out.println(modelTable.toJson());
-        HttpClass.PostRequest(ServerURL + "/model", modelTable.toJson());
+    public void CreateModel(ModelCreate modelCreate) {
+        HttpClass.PostRequest(ServerURL + "/model", modelCreate.toJson());
     }
 
     public void UpdateModel(ModelTable modelTable) {
@@ -109,6 +105,39 @@ public class RestAPI {
 
             Category category = new Category(id, name);
             result.add(category);
+        }
+        return result;
+    }
+
+    public Category GetCategoryById(Integer id) {
+        String buffer = HttpClass.GetRequest(ServerURL + "/category/" + id);
+
+        JsonObject currentCategory = JsonParser.parseString(buffer).getAsJsonObject();
+
+        if (currentCategory != null){
+            String name = currentCategory.get("name").getAsString();
+
+            return new Category(id, name);
+        } else
+            return null;
+    }
+
+    public List<Category> GetCategoryByName(String name) {
+        List<Category> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "/category/name_" + name);
+
+        if (buffer != null) {
+            JsonArray jsonAnswer = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonAnswer.size(); i++) {
+                JsonObject currentCategory = jsonAnswer.get(i).getAsJsonObject();
+
+                Integer id = currentCategory.get("id").getAsInt();
+
+                Category category = new Category(id, name);
+
+                result.add(category);
+            }
         }
         return result;
     }
@@ -163,8 +192,8 @@ public class RestAPI {
             return null;
     }
 
-    public List<String> GetCompaniesByName(String name) {
-        List<String> result = new ArrayList<>();
+    public List<Company> GetCompaniesByName(String name) {
+        List<Company> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/company/name_" + name);
 
         if (buffer != null) {
@@ -177,7 +206,7 @@ public class RestAPI {
 
                 Company company = new Company(id, name);
 
-                result.add(company.toJsonPUT());
+                result.add(company);
             }
         }
         return result;

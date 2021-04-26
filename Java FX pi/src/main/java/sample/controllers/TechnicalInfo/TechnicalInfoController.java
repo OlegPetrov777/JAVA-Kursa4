@@ -33,6 +33,12 @@ public class TechnicalInfoController {
     private TableColumn<ModelTable, String> nameModel;
 
     @FXML
+    private TableColumn<ModelTable, String> comIdModel;
+
+    @FXML
+    private TableColumn<ModelTable, String> catIdModel;
+
+    @FXML
     private TableView<Company> companyTable;
 
     @FXML
@@ -130,6 +136,8 @@ public class TechnicalInfoController {
         /* MODEL */
         modelID.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameModel.setCellValueFactory(new PropertyValueFactory<>("name"));
+        catIdModel.setCellValueFactory(new PropertyValueFactory<>("category"));
+        comIdModel.setCellValueFactory(new PropertyValueFactory<>("company"));
     }
 
     @FXML
@@ -174,6 +182,7 @@ public class TechnicalInfoController {
 
             if (selectedIndex >= 0) {
                 Company currentCompany = companyTable.getItems().get(selectedIndex);
+                System.out.println(currentCompany);
                 CompanyEditPage.showCompanyEditPage(currentCompany);
             } else
                 showAlert();

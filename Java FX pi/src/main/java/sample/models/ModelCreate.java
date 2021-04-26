@@ -36,13 +36,12 @@ public class ModelCreate implements APIModel {
 
     @Override
     public String toJson() {
-        Gson gson = new Gson();
-
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("name", name.get());
-        map.put("category", category.get().toJsonPUT());
-        map.put("company", company.get().toJsonPUT());
-        
+        map.put("category", new Gson().fromJson(getCategory().toJsonPUT(), JsonObject.class));
+        map.put("company", new Gson().fromJson(getCompany().toJsonPUT(), JsonObject.class));
+
+        Gson gson = new Gson();
         return gson.toJson(map);
     }
 
