@@ -1,13 +1,13 @@
-package sample.models;
+package sample.models.Product;
 
 import com.google.gson.Gson;
 import javafx.beans.property.*;
+import sample.models.APIModel;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Product implements APIModel {
+public class ProductTable implements APIModel {
 
     private IntegerProperty id;
     private StringProperty model;
@@ -16,12 +16,12 @@ public class Product implements APIModel {
     private StringProperty count;
 
 
-    public Product() {
+    public ProductTable() {
         this(null, null, null, null, null);
     }
 
 
-    public Product(Integer id, String model, String price, String color, String count) {
+    public ProductTable(Integer id, String model, String price, String color, String count) {
         this.id = new SimpleIntegerProperty(id);
         this.model = new SimpleStringProperty(model);
         this.price = new SimpleStringProperty(price);

@@ -14,11 +14,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.controllers.TechnicalInfo.Company.CompanyEditPage;
 import sample.models.Category;
 import sample.models.Company;
-import sample.models.ModelCreate;
-import sample.models.ModelTable;
+import sample.models.Model.ModelCreate;
+import sample.models.Model.ModelTable;
 
 import java.util.List;
 
@@ -51,9 +50,6 @@ public class ModelEditPage {
 
     @FXML
     void initialize() {
-        clickButtons();
-        showComboBoxCategory();
-        showComboBoxCompany();
     }
 
     public void clickButtons() {
@@ -68,7 +64,7 @@ public class ModelEditPage {
                 Company currentCompany = oneCompanyInList.get(0);
 
                 /* CATEGORY */
-                List<Category> oneCategoryInList = Main.session.GetCategoryByName(categoryBox.getValue());
+                List<Category> oneCategoryInList = Main.session.GetCategoriesByName(categoryBox.getValue());
                 Category currentCategory = oneCategoryInList.get(0);
 
                 /* MODEL */
@@ -144,6 +140,8 @@ public class ModelEditPage {
             ModelEditPage controller = loader.getController();
             controller.setModel(modelTable);
             controller.clickButtons();
+            controller.showComboBoxCategory();
+            controller.showComboBoxCompany();
 
             dialogueStage.show();
 

@@ -5,6 +5,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import sample.models.*;
+import sample.models.Model.ModelCreate;
+import sample.models.Model.ModelTable;
+import sample.models.Product.ProductCreate;
+import sample.models.Product.ProductTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +18,8 @@ public class RestAPI {
     private static final String ServerURL = "http://localhost:8090/api";
 
 
-    public List<Product> GetProduct() {
-        List<Product> result = new ArrayList<>();
+    public List<ProductTable> GetProduct() {
+        List<ProductTable> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/product");
 
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
@@ -29,25 +33,25 @@ public class RestAPI {
             String color = currentProduct.get("color").getAsString();
             String count = currentProduct.get("count").getAsString();
 
-            Product product = new Product(id, model, price, color, count);
-            result.add(product);
+            ProductTable productTable = new ProductTable(id, model, price, color, count);
+            result.add(productTable);
         }
         return result;
     }
 
-    public void CreateProduct(Product product) {
-        HttpClass.PostRequest(ServerURL + "/product", product.toJson());
+    public void CreateProduct(ProductCreate productCreate) {
+        HttpClass.PostRequest(ServerURL + "/product", productCreate.toJson());
     }
 
 
-    public void UpdateProduct(Product product) {
-        Integer id = product.getId();
-        String jsonString = product.toJson();
+    public void UpdateProduct(ProductCreate productCreate) {
+        Integer id = productCreate.getId();
+        String jsonString = productCreate.toJsonPUT();
         HttpClass.PutRequest(ServerURL + "/product/" + id, jsonString);
     }
 
-    public boolean DeleteProduct(Product product) {
-        Integer id = product.getId();
+    public boolean DeleteProduct(ProductTable productTable) {
+        Integer id = productTable.getId();
         return HttpClass.DeleteRequest(ServerURL + "/product/" + id);
     }
 
@@ -79,12 +83,41 @@ public class RestAPI {
 
         if (currentModel != null){
             String name = currentModel.get("name").getAsString();
-            String category = currentModel.get("category").getAsJsonObject().get("name").getAsString();;
-            String company = currentModel.get("company").getAsJsonObject().get("name").getAsString();;
+            String category = currentModel.get("category").getAsJsonObject().get("name").getAsString();
+            String company = currentModel.get("company").getAsJsonObject().get("name").getAsString();
 
             return new ModelTable(name, category, company);
         } else
             return null;
+    }
+
+    public List<ModelCreate> GetModelsByName(String name) {
+        List<ModelCreate> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "/model/name_" + name);
+        if (buffer != null) {
+            JsonArray jsonAnswer = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonAnswer.size(); i++) {
+                JsonObject currentModel = jsonAnswer.get(i).getAsJsonObject();
+
+                Integer id = currentModel.get("id").getAsInt();
+
+                /* CATEGORY */
+                Integer categoryId = currentModel.get("category").getAsJsonObject().get("id").getAsInt();
+                String categoryName = currentModel.get("category").getAsJsonObject().get("name").getAsString();
+                Category category = new Category(categoryId, categoryName);
+
+                 /* COMPANY */
+                Integer companyId = currentModel.get("company").getAsJsonObject().get("id").getAsInt();
+                String companyName = currentModel.get("company").getAsJsonObject().get("name").getAsString();
+                Company company = new Company(companyId, companyName);
+
+                /* MODEL */
+                ModelCreate model = new ModelCreate(id, name, category, company);
+                result.add(model);
+            }
+        }
+        return result;
     }
 
     public void CreateModel(ModelCreate modelCreate) {
@@ -102,7 +135,6 @@ public class RestAPI {
         Integer id = modelTable.getId();
         return HttpClass.DeleteRequest(ServerURL + "/model/" + id);
     }
-
 
 
 
@@ -137,7 +169,7 @@ public class RestAPI {
             return null;
     }
 
-    public List<Category> GetCategoryByName(String name) {
+    public List<Category> GetCategoriesByName(String name) {
         List<Category> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/category/name_" + name);
 
@@ -193,7 +225,7 @@ public class RestAPI {
         return result;
     }
 
-    public Company GetCompaniesById(Integer id) {
+    public Company GetCompanyById(Integer id) {
         String buffer = HttpClass.GetRequest(ServerURL + "/company/" + id);
 
         JsonObject currentCompany = JsonParser.parseString(buffer).getAsJsonObject();

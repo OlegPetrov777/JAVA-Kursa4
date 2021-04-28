@@ -1,10 +1,11 @@
-package sample.models;
+package sample.models.Model;
 
 import com.google.gson.Gson;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import sample.models.APIModel;
 
 import java.util.HashMap;
 import java.util.Map;

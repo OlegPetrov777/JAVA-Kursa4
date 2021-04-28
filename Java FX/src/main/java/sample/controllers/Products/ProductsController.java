@@ -8,32 +8,29 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.models.ModelTable;
-import sample.models.Product;
+import sample.models.Model.ModelTable;
+import sample.models.Product.ProductTable;
 
 
 public class ProductsController {
 
     @FXML
-    private TableView<Product> productsTable;
+    private TableView<ProductTable> productsTable;
 
     @FXML
-    private TableColumn<Product, String> ID;
+    private TableColumn<ProductTable, String> ID;
 
     @FXML
-    private TableColumn<Product, String> modelColumn;
+    private TableColumn<ProductTable, String> modelColumn;
 
     @FXML
-    private TableColumn<Product, String> priceColumn;
+    private TableColumn<ProductTable, String> priceColumn;
 
     @FXML
-    private TableColumn<Product, String> colorColumn;
+    private TableColumn<ProductTable, String> colorColumn;
 
     @FXML
-    private TableColumn<Product, String> countColumn;
-
-    @FXML
-    private ComboBox<String> modelBox;
+    private TableColumn<ProductTable, String> countColumn;
 
     @FXML
     private Button newButton;
@@ -45,9 +42,7 @@ public class ProductsController {
     private Button deleteButton;
 
 
-    ObservableList<Product> productData = FXCollections.observableArrayList();
-    ObservableList<ModelTable> modelTableData = FXCollections.observableArrayList();
-    ObservableList<String> modelNameData = FXCollections.observableArrayList();
+    ObservableList<ProductTable> productTableData = FXCollections.observableArrayList();
 
 
     @FXML
@@ -55,27 +50,7 @@ public class ProductsController {
         clickButtons();
         showTable();
         showColumn();
-        showComboBox();
     }
-
-    private void showComboBox() {
-        modelTableData.clear();
-        modelTableData.addAll(Main.session.GetModel());
-
-        modelNameData.clear();
-        for (ModelTable modelTable : modelTableData){
-            modelNameData.add(modelTable.getName());
-        }
-        modelBox.setItems(modelNameData);
-    }
-
-    public void setCompany(ModelTable modelTable){
-        if (modelTable.getName() != null){
-            modelBox.getSelectionModel().select(modelTable.getName());
-            initialize();
-        }
-    }
-
 
     private void showColumn() {
         ID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -86,9 +61,9 @@ public class ProductsController {
     }
 
     private void showTable(){
-        productData.clear();
-        productData.addAll(Main.session.GetProduct());
-        productsTable.setItems(productData);
+        productTableData.clear();
+        productTableData.addAll(Main.session.GetProduct());
+        productsTable.setItems(productTableData);
     }
 
     private void showAlert() {
@@ -118,8 +93,8 @@ public class ProductsController {
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 
             if (selectedIndex >= 0) {
-                Product product = productsTable.getItems().get(selectedIndex);
-                ProductEditPage.showProductEditPage(product);
+                ProductTable productTable = productsTable.getItems().get(selectedIndex);
+                ProductEditPage.showProductEditPage(productTable);
             } else
                 showAlert();
         });
@@ -130,7 +105,7 @@ public class ProductsController {
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 
             if (selectedIndex >= 0) {
-                Product currentPerson = productsTable.getItems().get(selectedIndex);
+                ProductTable currentPerson = productsTable.getItems().get(selectedIndex);
 
                 if (Main.session.DeleteProduct(currentPerson))
                     productsTable.getItems().remove(selectedIndex);

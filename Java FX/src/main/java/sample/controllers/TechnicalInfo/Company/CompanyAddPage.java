@@ -29,7 +29,7 @@ public class CompanyAddPage {
 
     @FXML
     void initialize() {
-        clickButtons();
+
     }
 
     public void clickButtons() {
@@ -76,6 +76,9 @@ public class CompanyAddPage {
 
             Scene scene = new Scene(page);
             dialogueStage.setScene(scene);
+
+            CompanyAddPage controller = loader.getController();
+            controller.clickButtons();
 
             dialogueStage.show();
 

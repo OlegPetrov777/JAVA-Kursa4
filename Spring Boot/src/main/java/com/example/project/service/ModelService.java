@@ -1,5 +1,6 @@
 package com.example.project.service;
 
+import com.example.project.entity.Company;
 import com.example.project.entity.Model;
 import com.example.project.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ModelService {
 
     public Optional<Model> find(Long id){
         return modelRepository.findById(id);
+    }
+
+
+    public List<Model> findByName(String name){
+        return modelRepository.findByName(name);
     }
 
 

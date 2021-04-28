@@ -1,23 +1,30 @@
 package sample.controllers.Products;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.models.Product;
-import sample.utils.RestAPI;
+import sample.models.Model.ModelCreate;
+import sample.models.Model.ModelTable;
+import sample.models.Product.ProductCreate;
+import sample.models.Product.ProductTable;
+
+import java.util.List;
 
 public class ProductAddPage {
 
     @FXML
-    private TextField modelField;
+    private ComboBox<String> modelBox;
 
     @FXML
     private TextField priceField;
@@ -38,34 +45,48 @@ public class ProductAddPage {
     private Button cancelButton;
 
     @FXML
-    void initialize() { clickButtons(); }
+    void initialize() { }
 
+
+    ObservableList<ModelTable> modelData = FXCollections.observableArrayList();
+    ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
+            if (isInputValid()){
+                List<ModelCreate> oneModelInList = Main.session.GetModelsByName(modelBox.getValue());
+                ModelCreate currentCompany = oneModelInList.get(0);
 
+                ProductCreate productCreate = new ProductCreate();
+                productCreate.setModel(currentCompany);
+                productCreate.setPrice(priceField.getText());
+                productCreate.setColor(colorField.getText());
+                productCreate.setCount(countField.getText());
+
+                Main.session.CreateProduct(productCreate);
+
+                cancelButton.getScene().getWindow().hide();
+            }
         });
 
         /* НАЖАТИЕ НА КНОПКУ Cancel */
-        cancelButton.setOnAction(event -> {
-            cancelButton.getScene().getWindow().hide();
-        });
+        cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
     private boolean isInputValid() {
         String errorMessage = "";
-        if (modelField.getText() == null || modelField.getText().length() == 0) {
-            errorMessage += "Error: modelField";
-        }
-        else if (priceField.getText() == null || priceField.getText().length() == 0) {
-            errorMessage += "Error: priceField";
+        if (priceField.getText() == null || priceField.getText().length() == 0) {
+            errorMessage += "Error: not found Price";
         }
         else if (colorField.getText() == null || colorField.getText().length() == 0) {
-            errorMessage += "Error: colorField";
+            errorMessage += "Error: not found Color";
         }
         else if (countField.getText() == null || countField.getText().length() == 0) {
-            errorMessage += "Error: countField";
+            errorMessage += "Error: not found Amount";
+        }
+        else if (modelBox.getValue() == null) {
+            errorMessage += "Error: not found Model";
         }
 
         if (errorMessage.length() == 0) {
@@ -74,6 +95,17 @@ public class ProductAddPage {
             message.setText(errorMessage);
             return false;
         }
+    }
+
+    private void showComboBoxModel() {
+        modelData.clear();
+        modelData.addAll(Main.session.GetModel());
+
+        modelNameData.clear();
+        for (ModelTable modelTable: modelData){
+            modelNameData.add(modelTable.getName());
+        }
+        modelBox.setItems(modelNameData);
     }
 
     public static void showProductAddPage() {
@@ -91,7 +123,11 @@ public class ProductAddPage {
             Scene scene = new Scene(page);
             dialogueStage.setScene(scene);
 
-            dialogueStage.showAndWait();
+            ProductAddPage controller = loader.getController();
+            controller.clickButtons();
+            controller.showComboBoxModel();
+
+            dialogueStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.controllers.MenuBarController;
 import sample.controllers.Products.ProductAddPage;
+import sample.controllers.TechnicalInfo.Company.CompanyAddPage;
 import sample.models.Category;
 
 
@@ -78,6 +79,9 @@ public class CategoryAddPage {
 
             Scene scene = new Scene(page);
             dialogueStage.setScene(scene);
+
+            CategoryAddPage controller = loader.getController();
+            controller.clickButtons();
 
             dialogueStage.show();
 

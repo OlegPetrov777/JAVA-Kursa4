@@ -18,8 +18,7 @@ import sample.controllers.TechnicalInfo.Model.ModelAddPage;
 import sample.controllers.TechnicalInfo.Model.ModelEditPage;
 import sample.models.Category;
 import sample.models.Company;
-import sample.models.ModelCreate;
-import sample.models.ModelTable;
+import sample.models.Model.ModelTable;
 
 
 public class TechnicalInfoController {

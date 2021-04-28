@@ -13,8 +13,7 @@ import sample.Main;
 import sample.controllers.MenuBarController;
 import sample.models.Category;
 import sample.models.Company;
-import sample.models.ModelCreate;
-import sample.models.ModelTable;
+import sample.models.Model.ModelCreate;
 
 import java.util.List;
 
@@ -45,9 +44,51 @@ public class ModelAddPage {
 
     @FXML
     void initialize() {
-        clickButtons();
-        showComboBoxCategory();
-        showComboBoxCompany();
+    }
+
+
+    public void clickButtons() {
+
+        /* НАЖАТИЕ НА КНОПКУ OK */
+        okButton.setOnAction(event -> {
+            if (isInputValid()){
+                /* COMPANY */
+                List<Company> oneCompanyInList = Main.session.GetCompaniesByName(companyBox.getValue());
+                Company currentCompany = oneCompanyInList.get(0);
+
+                /* CATEGORY */
+                List<Category> oneCategoryInList = Main.session.GetCategoriesByName(categoryBox.getValue());
+                Category currentCategory = oneCategoryInList.get(0);
+
+                /* MODEL */
+                ModelCreate modelCreate = new ModelCreate(nameField.getText().replace(" ", "-"), currentCategory, currentCompany);
+
+                Main.session.CreateModel(modelCreate);
+
+                cancelButton.getScene().getWindow().hide();
+            }
+        });
+
+        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
+    }
+
+    private boolean isInputValid() {
+        String errorMessage = "";
+        if (nameField.getText() == null || nameField.getText().length() == 0) {
+            errorMessage += "Error: not found Name";
+        } else if (companyBox.getValue() == null){
+            errorMessage += "Error: not found Company";
+        } else if (categoryBox.getValue() == null){
+            errorMessage += "Error: not found Category";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            errorLabel.setText(errorMessage);
+            return false;
+        }
     }
 
     private void showComboBoxCategory() {
@@ -72,47 +113,6 @@ public class ModelAddPage {
         companyBox.setItems(companyNameData);
     }
 
-
-    public void clickButtons() {
-
-        /* НАЖАТИЕ НА КНОПКУ OK */
-        okButton.setOnAction(event -> {
-            if (isInputValid()){
-                /* COMPANY */
-                List<Company> oneCompanyInList = Main.session.GetCompaniesByName(companyBox.getValue());
-                Company currentCompany = oneCompanyInList.get(0);
-
-                /* CATEGORY */
-                List<Category> oneCategoryInList = Main.session.GetCategoryByName(categoryBox.getValue());
-                Category currentCategory = oneCategoryInList.get(0);
-
-                /* MODEL */
-                ModelCreate modelCreate = new ModelCreate(nameField.getText(), currentCategory, currentCompany);
-
-                Main.session.CreateModel(modelCreate);
-
-                cancelButton.getScene().getWindow().hide();
-            }
-        });
-
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
-        cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
-    }
-
-    private boolean isInputValid() {
-        String errorMessage = "";
-        if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "Error: Name Field";
-        }
-
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
-            errorLabel.setText(errorMessage);
-            return false;
-        }
-    }
-
     public static void showModelAddPage() {
         try {
             Stage dialogueStage = new Stage();
@@ -127,6 +127,11 @@ public class ModelAddPage {
 
             Scene scene = new Scene(page);
             dialogueStage.setScene(scene);
+
+            ModelAddPage controller = loader.getController();
+            controller.showComboBoxCategory();
+            controller.showComboBoxCompany();
+            controller.clickButtons();
 
             dialogueStage.show();
 

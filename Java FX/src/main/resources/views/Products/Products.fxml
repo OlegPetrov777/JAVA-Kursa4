@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="558.0" prefWidth="1000.0" style="-fx-background-color: #5e8e73;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
    <children>
       <TableView fx:id="productsTable" layoutY="55.0" prefHeight="267.0" prefWidth="600.0" style="-fx-background-color: #88cb99;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <columns>
-          <TableColumn fx:id="ID" text="ID" />
+          <TableColumn fx:id="ID" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="modelColumn" prefWidth="450.0" text="Model" />
-          <TableColumn fx:id="priceColumn" prefWidth="120.0" text="Price" />
+          <TableColumn fx:id="priceColumn" prefWidth="150.0" text="Price" />
             <TableColumn fx:id="colorColumn" prefWidth="150.0" text="Color" />
-            <TableColumn fx:id="countColumn" prefWidth="120.0" text="Count" />
+            <TableColumn fx:id="countColumn" prefWidth="150.0" text="Count" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="10.0" text="Products" textFill="#80b96b">
@@ -27,6 +29,14 @@
             <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
         </buttons>
       </ButtonBar>
-      <ComboBox fx:id="modelBox" layoutX="192.0" layoutY="20.0" prefWidth="150.0" promptText="Model" />
+      <Button layoutX="933.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="36.0" style="-fx-background-color: #5e8e73;">
+         <graphic>
+            <Group>
+               <children>
+                  <SVGPath content="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z" scaleX="0.05" scaleY="0.05" />
+               </children>
+            </Group>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

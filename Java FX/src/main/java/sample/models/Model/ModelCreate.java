@@ -1,8 +1,11 @@
-package sample.models;
+package sample.models.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javafx.beans.property.*;
+import sample.models.APIModel;
+import sample.models.Category;
+import sample.models.Company;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
