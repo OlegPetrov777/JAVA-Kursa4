@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.models.Model.ModelTable;
+import sample.controllers.Orders.OrderAddPage;
 import sample.models.Product.ProductTable;
 
 
@@ -31,6 +31,9 @@ public class ProductsController {
 
     @FXML
     private TableColumn<ProductTable, String> countColumn;
+
+    @FXML
+    private Button newOrderButton;
 
     @FXML
     private Button newButton;
@@ -82,6 +85,15 @@ public class ProductsController {
      */
     @FXML
     public void clickButtons() {
+        newOrderButton.setOnAction(event -> {
+            int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
+
+            if (selectedIndex >= 0) {
+                ProductTable productTable = productsTable.getItems().get(selectedIndex);
+                OrderAddPage.showOrderAddPage(productTable.getId());
+            }
+
+        });
 
         /* НАЖАТИЕ НА КНОПКУ NEW */
         newButton.setOnAction(event -> {

@@ -10,12 +10,42 @@ import sample.models.Model.ModelTable;
 import sample.models.Product.ProductCreate;
 import sample.models.Product.ProductTable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class RestAPI {
     private static final String ServerURL = "http://localhost:8090/api";
+
+    public List<Order> GetOrder() {
+        List<Order> result = new ArrayList<>();
+        String buffer = HttpClass.GetRequest(ServerURL + "/order");
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+        for (int i = 0; i < jsonResult.size(); i++) {
+            JsonObject currentOrder = jsonResult.get(i).getAsJsonObject();
+
+            Integer id = currentOrder.get("id").getAsInt();
+            LocalDate dateOfCreate = DateUtil.parse(currentOrder.get("date_of_create").getAsString());
+            LocalDate dateOfReady = DateUtil.parse(currentOrder.get("date_of_ready").getAsString());
+            Integer productId = currentOrder.get("product_id").getAsInt();
+
+            Order order = new Order(id, dateOfCreate, dateOfReady, productId);
+            result.add(order);
+        }
+        return result;
+    }
+
+    public void CreateOrder(Order order) {
+        //System.out.println(order.toJson());
+        HttpClass.PostRequest(ServerURL + "/order", order.toJson());
+    }
+
+    public boolean DeleteOrder(Order order) {
+        Integer id = order.getId();
+        return HttpClass.DeleteRequest(ServerURL + "/order/" + id);
+    }
 
 
     public List<ProductTable> GetProduct() {
@@ -37,6 +67,23 @@ public class RestAPI {
             result.add(productTable);
         }
         return result;
+    }
+
+    public ProductTable GetProductById(Integer id) {
+        String buffer = HttpClass.GetRequest(ServerURL + "/product/" + id);
+
+        JsonObject currentProduct = JsonParser.parseString(buffer).getAsJsonObject();
+
+        if (currentProduct != null){
+            String model = currentProduct.get("model").getAsJsonObject().get("name").getAsString();
+            String price = currentProduct.get("price").getAsString();
+            String color = currentProduct.get("color").getAsString();
+            String count = currentProduct.get("count").getAsString();
+
+
+            return new ProductTable(id, model, price, color, count);
+        } else
+            return null;
     }
 
     public void CreateProduct(ProductCreate productCreate) {

@@ -1,7 +1,9 @@
 package com.example.project.service;
 
 import com.example.project.entity.Order;
+import com.example.project.entity.Product;
 import com.example.project.repository.OrderRepository;
+import com.example.project.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,13 @@ import java.util.Optional;
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-    public void create(Order manufacturer){
-        orderRepository.save(manufacturer);
+    public void create(Order order){
+        Product product = productRepository.findById(order.getProduct_id()).orElseThrow();
+        order.setProduct(product);
+        orderRepository.save(order);
     }
 
     public List<Order> findAll(){

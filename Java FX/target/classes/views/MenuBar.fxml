@@ -26,14 +26,6 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="customersButton" disable="true" mnemonicParsing="false" prefHeight="49.0" prefWidth="190.0" style="-fx-background-color: #1e5b48;" text="Customers" textFill="#80b96b">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
                   <Button fx:id="ordersButton" mnemonicParsing="false" prefHeight="92.0" prefWidth="168.0" style="-fx-background-color: #1e5b48;" text="Orders" textFill="#80b96b">
                      <font>
                         <Font size="18.0" />
