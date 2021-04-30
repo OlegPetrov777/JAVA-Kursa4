@@ -77,9 +77,9 @@ public class ModelAddPage {
         String errorMessage = "";
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "Error: not found Name";
-        } else if (companyBox.getValue() == null){
+        } else if (companyBox.getValue() == null) {
             errorMessage += "Error: not found Company";
-        } else if (categoryBox.getValue() == null){
+        } else if (categoryBox.getValue() == null) {
             errorMessage += "Error: not found Category";
         }
 

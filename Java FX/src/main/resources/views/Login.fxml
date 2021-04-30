@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #1e5b48;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #1e5b48;" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LoginController">
    <children>
       <AnchorPane layoutY="-21.0" prefHeight="555.0" prefWidth="1000.0" style="-fx-background-color: #5e8e73;" AnchorPane.bottomAnchor="0.0">
          <children>
@@ -25,7 +25,7 @@
                         <Font name="Impact" size="35.0" />
                      </font>
                   </Label>
-                  <Button fx:id="loginButton" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #80b96b;" text="Sign In" textAlignment="CENTER" textFill="#060800">
+                  <Button fx:id="loginButton" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="88.0" text="Sign In" textAlignment="CENTER" textFill="#060800">
                      <font>
                         <Font name="Impact" size="20.0" />
                      </font>

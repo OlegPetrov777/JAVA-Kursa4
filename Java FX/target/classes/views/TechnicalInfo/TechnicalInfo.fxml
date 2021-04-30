@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="558.0" prefWidth="1000.0" style="-fx-background-color: #5e8e73;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.TechnicalInfo.TechnicalInfoController">
+<AnchorPane prefHeight="558.0" prefWidth="1000.0" style="-fx-background-color: #5e8e73;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.TechnicalInfo.TechnicalInfoController">
    <children>
       <Label layoutX="14.0" layoutY="10.0" text="Technical information" textFill="#80b96b">
          <font>
             <Font name="Impact" size="36.0" />
          </font></Label>
-      <GridPane layoutY="47.0" prefHeight="511.0" prefWidth="1000.0">
+      <GridPane layoutY="81.0" prefHeight="475.0" prefWidth="1000.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="436.0" minWidth="10.0" prefWidth="440.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="280.0" />
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="280.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="10.0" minHeight="0.0" prefHeight="0.0" />
-          <RowConstraints maxHeight="45.6" minHeight="29.6" prefHeight="45.6" valignment="BOTTOM" />
+          <RowConstraints maxHeight="24.800006866455078" minHeight="0.0" prefHeight="16.800006866455078" />
+            <RowConstraints maxHeight="45.6" minHeight="28.80001220703125" prefHeight="32.00000915527344" valignment="CENTER" />
             <RowConstraints maxHeight="463.1999877929687" minHeight="10.0" prefHeight="357.4" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="227.00000610351563" minHeight="4.000012207031261" prefHeight="48.799957275390625" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <TableView fx:id="modelTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -35,7 +43,7 @@
                   <Insets />
                </opaqueInsets>
                <GridPane.margin>
-                  <Insets left="20.0" right="10.0" />
+                  <Insets bottom="20.0" left="20.0" right="10.0" />
                </GridPane.margin>
             </TableView>
             <TableView fx:id="companyTable" prefHeight="261.0" prefWidth="336.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -44,7 +52,7 @@
                 <TableColumn fx:id="nameCompany" prefWidth="210.0" text="Name" />
               </columns>
                <GridPane.margin>
-                  <Insets left="9.0" right="9.0" />
+                  <Insets bottom="20.0" left="9.0" right="9.0" />
                </GridPane.margin>
             </TableView>
             <TableView fx:id="categoryTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -53,40 +61,10 @@
                 <TableColumn fx:id="nameCategory" prefWidth="200.0" text="Name" />
               </columns>
                <GridPane.margin>
-                  <Insets left="10.0" right="20.0" />
+                  <Insets bottom="20.0" left="10.0" right="20.0" />
                </GridPane.margin>
             </TableView>
-            <ButtonBar prefHeight="40.0" prefWidth="267.0" GridPane.rowIndex="3">
-              <buttons>
-                  <Button fx:id="NewModelBut" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="New" />
-                  <Button fx:id="EditModelBut" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" text="Edit" />
-                <Button fx:id="DeleteModelBut" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Delete" />
-              </buttons>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </ButtonBar>
-            <ButtonBar prefHeight="49.0" prefWidth="314.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-              <buttons>
-                <Button fx:id="NewCompanyBut" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="New" />
-                  <Button fx:id="EditCompanyBut" mnemonicParsing="false" prefHeight="26.0" text="Edit" />
-                  <Button fx:id="DeleteCompanyBut" mnemonicParsing="false" prefHeight="26.0" text="Delete" />
-              </buttons>
-               <GridPane.margin>
-                  <Insets left="-10.0" right="10.0" />
-               </GridPane.margin>
-            </ButtonBar>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-              <buttons>
-                <Button fx:id="NewCategoryBut" mnemonicParsing="false" prefHeight="26.0" prefWidth="213.0" text="New" />
-                  <Button fx:id="EditCategoryBut" mnemonicParsing="false" text="Edit" />
-                  <Button fx:id="DeleteCategoryBut" mnemonicParsing="false" text="Delete" />
-              </buttons>
-               <GridPane.margin>
-                  <Insets left="-10.0" right="20.0" />
-               </GridPane.margin>
-            </ButtonBar>
-            <Label text="Model" GridPane.rowIndex="1">
+            <Label text="Model" textFill="#030000" GridPane.rowIndex="1">
                <font>
                   <Font name="Impact" size="24.0" />
                </font>
@@ -102,6 +80,141 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
+            <HBox alignment="TOP_RIGHT" prefHeight="33.0" prefWidth="153.0" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="35.0">
+                     <children>
+                        <Button fx:id="NewModelBut" minWidth="26.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="47.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" scaleX="0.05" scaleY="0.05" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="35.0">
+                     <children>
+                        <Button fx:id="EditModelBut" minWidth="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" scaleX="0.045" scaleY="0.045" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="35.0">
+                     <children>
+                      <Button fx:id="DeleteModelBut" minWidth="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z" scaleX="0.045" scaleY="0.045" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="300.0" right="10.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="33.0" prefWidth="134.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="155.0" right="9.0" />
+               </GridPane.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="0.0">
+                     <children>
+                      <Button fx:id="NewCompanyBut" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" scaleX="0.05" scaleY="0.05" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="42.0">
+                     <children>
+                        <Button fx:id="EditCompanyBut" mnemonicParsing="false" prefHeight="31.0" prefWidth="26.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" scaleX="0.045" scaleY="0.045" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="18.0">
+                     <children>
+                        <Button fx:id="DeleteCompanyBut" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-color: #5e8e73;">
+                           <graphic>
+                              <Group>
+                                 <children>
+                                    <SVGPath content="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z" scaleX="0.045" scaleY="0.045" />
+                                 </children>
+                              </Group>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="33.0" prefWidth="73.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="145.0" right="20.0" />
+               </GridPane.margin>
+               <children>
+                <Button fx:id="NewCategoryBut" mnemonicParsing="false" prefHeight="31.0" prefWidth="10.0" style="-fx-background-color: #5e8e73;">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" scaleX="0.05" scaleY="0.05" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="EditCategoryBut" mnemonicParsing="false" prefHeight="31.0" prefWidth="12.0" style="-fx-background-color: #5e8e73;">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" scaleX="0.045" scaleY="0.045" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="DeleteCategoryBut" mnemonicParsing="false" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #5e8e73;">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z" scaleX="0.045" scaleY="0.045" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
             <Label text="Category" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="Impact" size="24.0" />

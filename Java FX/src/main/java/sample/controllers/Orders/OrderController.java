@@ -118,7 +118,7 @@ public class OrderController {
 
             if (selectedIndex >= 0) {
                 Order currentOrder = orderTable.getItems().get(selectedIndex);
-                //ProductEditPage.showProductEditPage(currentOrder);
+                OrderEditPage.showOrderEditPage(currentOrder);
             } else
                 showAlert();
         });

@@ -86,6 +86,7 @@ public class ProductEditPage {
         priceField.setText(productTable.getPrice());
         colorField.setText(productTable.getColor());
         countField.setText(productTable.getCount());
+        modelBox.setValue(productTable.getModel());
     }
 
 

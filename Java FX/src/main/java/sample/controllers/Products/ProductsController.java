@@ -91,8 +91,8 @@ public class ProductsController {
             if (selectedIndex >= 0) {
                 ProductTable productTable = productsTable.getItems().get(selectedIndex);
                 OrderAddPage.showOrderAddPage(productTable.getId());
-            }
-
+            } else
+                showAlert();
         });
 
         /* НАЖАТИЕ НА КНОПКУ NEW */

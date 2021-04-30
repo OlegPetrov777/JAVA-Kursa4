@@ -13,11 +13,7 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.controllers.MenuBarController;
 import sample.controllers.Products.ProductAddPage;
-import sample.models.Model.ModelCreate;
 import sample.models.Order;
-import sample.models.Product.ProductCreate;
-
-import java.util.List;
 
 public class OrderAddPage {
 
@@ -50,7 +46,7 @@ public class OrderAddPage {
 
                 Integer index = Integer.parseInt(productIdField.getText().trim()); // Конвертация string в int
 
-                Order order = new Order(completionDate.getValue(), completionDate.getValue(), index);
+                Order order = new Order(createDate.getValue(), completionDate.getValue(), index);
                 Main.session.CreateOrder(order);
 
                 cancelButton.getScene().getWindow().hide();
@@ -69,6 +65,10 @@ public class OrderAddPage {
         String errorMessage = "";
         if (productIdField.getText() == null || productIdField.getText().length() == 0) {
             errorMessage += "Error: not found Product ID";
+        } else if (createDate.getValue() == null) {
+            errorMessage += "Error: not found Date";
+        } else if (completionDate.getValue() == null) {
+            errorMessage += "Error: not found Date";
         }
 
         if (errorMessage.length() == 0) {
