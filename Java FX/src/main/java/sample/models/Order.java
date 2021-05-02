@@ -17,23 +17,27 @@ public class Order implements APIModel{
     private ObjectProperty<LocalDate> date_of_create;
     private ObjectProperty<LocalDate> date_of_ready;
     private IntegerProperty product_id;
+    private IntegerProperty amount;
 
 
     public Order() {
         this(null, null, null, null);
     }
 
-    public Order(LocalDate date_of_create, LocalDate date_of_ready, Integer product_id) {
+    public Order(LocalDate date_of_create, LocalDate date_of_ready, Integer product_id, Integer amount) {
         this.date_of_create = new SimpleObjectProperty<>(date_of_create);
         this.date_of_ready = new SimpleObjectProperty<>(date_of_ready);
         this.product_id = new SimpleIntegerProperty(product_id);
+        this.amount = new SimpleIntegerProperty(amount);
+
     }
 
-    public Order(Integer id, LocalDate date_of_create, LocalDate date_of_ready, Integer product_id) {
+    public Order(Integer id, LocalDate date_of_create, LocalDate date_of_ready, Integer product_id, Integer amount) {
         this.id = new SimpleIntegerProperty(id);;
         this.date_of_create = new SimpleObjectProperty<>(date_of_create);
         this.date_of_ready = new SimpleObjectProperty<>(date_of_ready);
         this.product_id = new SimpleIntegerProperty(product_id);
+        this.amount = new SimpleIntegerProperty(amount);
     }
 
     @Override
@@ -42,6 +46,7 @@ public class Order implements APIModel{
         map.put("date_of_create", DateUtil.format(date_of_create.get()));
         map.put("date_of_ready", DateUtil.format(date_of_ready.get()));
         map.put("product_id", String.valueOf(product_id.get()));
+        map.put("amount", String.valueOf(amount.get()));
 
         Gson gson = new Gson();
         return gson.toJson(map);
@@ -55,6 +60,7 @@ public class Order implements APIModel{
         map.put("date_of_create", DateUtil.format(date_of_create.get()));
         map.put("date_of_ready", DateUtil.format(date_of_ready.get()));
         map.put("product_id", String.valueOf(product_id.get()));
+        map.put("amount", String.valueOf(amount.get()));
 
         Gson gson = new Gson();
         return gson.toJson(map);
@@ -91,5 +97,13 @@ public class Order implements APIModel{
 
     public void setProduct_id(Integer product_id) {
         this.product_id.set(product_id);
+    }
+
+    public Integer getAmount() {
+        return amount.get();
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount.set(amount);
     }
 }

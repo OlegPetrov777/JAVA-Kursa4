@@ -27,6 +27,9 @@ public class OrderAddPage {
     private TextField productIdField;
 
     @FXML
+    private TextField amountField;
+
+    @FXML
     private Button okButton;
 
     @FXML
@@ -45,8 +48,9 @@ public class OrderAddPage {
             if (isInputValid()){
 
                 Integer index = Integer.parseInt(productIdField.getText().trim()); // Конвертация string в int
+                Integer amount = Integer.parseInt(amountField.getText().trim());
 
-                Order order = new Order(createDate.getValue(), completionDate.getValue(), index);
+                Order order = new Order(createDate.getValue(), completionDate.getValue(), index, amount);
                 Main.session.CreateOrder(order);
 
                 cancelButton.getScene().getWindow().hide();
@@ -65,6 +69,8 @@ public class OrderAddPage {
         String errorMessage = "";
         if (productIdField.getText() == null || productIdField.getText().length() == 0) {
             errorMessage += "Error: not found Product ID";
+        } else if (amountField.getText() == null || amountField.getText().length() == 0) {
+            errorMessage += "Error: not found Amount";
         } else if (createDate.getValue() == null) {
             errorMessage += "Error: not found Date";
         } else if (completionDate.getValue() == null) {

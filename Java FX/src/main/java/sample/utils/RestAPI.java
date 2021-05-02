@@ -30,8 +30,9 @@ public class RestAPI {
             LocalDate dateOfCreate = DateUtil.parse(currentOrder.get("date_of_create").getAsString());
             LocalDate dateOfReady = DateUtil.parse(currentOrder.get("date_of_ready").getAsString());
             Integer productId = currentOrder.get("product_id").getAsInt();
+            Integer amount = currentOrder.get("amount").getAsInt();
 
-            Order order = new Order(id, dateOfCreate, dateOfReady, productId);
+            Order order = new Order(id, dateOfCreate, dateOfReady, productId, amount);
             result.add(order);
         }
         return result;
@@ -42,11 +43,17 @@ public class RestAPI {
         HttpClass.PostRequest(ServerURL + "/order", order.toJson());
     }
 
+    public void UpdateOrder(Order order) {
+        Integer id = order.getId();
+        String jsonString = order.toJsonPUT();
+        HttpClass.PutRequest(ServerURL + "/order/" + id, jsonString);
+    }
+
     public boolean DeleteOrder(Order order) {
         Integer id = order.getId();
         return HttpClass.DeleteRequest(ServerURL + "/order/" + id);
     }
-
+//  #5e8e73          #1e5b48
 
     public List<ProductTable> GetProduct() {
         List<ProductTable> result = new ArrayList<>();
@@ -89,7 +96,6 @@ public class RestAPI {
     public void CreateProduct(ProductCreate productCreate) {
         HttpClass.PostRequest(ServerURL + "/product", productCreate.toJson());
     }
-
 
     public void UpdateProduct(ProductCreate productCreate) {
         Integer id = productCreate.getId();

@@ -20,6 +20,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Date of creation">
@@ -34,9 +35,15 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <TextField fx:id="productIdField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <DatePicker fx:id="createDate" GridPane.columnIndex="1" />
             <DatePicker fx:id="completionDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="productIdField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Amount" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="amountField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" layoutX="30.0" layoutY="312.0" prefHeight="64.0" prefWidth="340.0">
@@ -58,9 +65,9 @@
                </children>
             </HBox>
          </children></HBox>
-      <Label fx:id="message" layoutX="30.0" layoutY="82.0" prefHeight="18.0" prefWidth="340.0" text=" " textFill="RED">
+      <Label fx:id="message" layoutX="30.0" layoutY="81.0" prefHeight="30.0" prefWidth="340.0" text=" " textFill="RED">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font></Label>
    </children>
 </AnchorPane>

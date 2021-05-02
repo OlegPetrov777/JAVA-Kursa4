@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
 import com.example.project.entity.Order;
 import com.example.project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,13 @@ public class OrderController {
         return order.isPresent()
                 ? new ResponseEntity<>(order, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/api/order/{id}")
+    public ResponseEntity<List<Order>> update(@RequestBody Order order) {
+        final List<Order> orderList = orderService.update(order);
+
+        return new ResponseEntity<>(orderList, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/api/order/{id}")

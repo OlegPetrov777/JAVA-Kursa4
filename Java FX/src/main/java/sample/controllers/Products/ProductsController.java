@@ -11,8 +11,19 @@ import sample.controllers.MenuBarController;
 import sample.controllers.Orders.OrderAddPage;
 import sample.models.Product.ProductTable;
 
+import java.util.List;
+
 
 public class ProductsController {
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private Button searchButton;
+
+    @FXML
+    private Label message;
 
     @FXML
     private TableView<ProductTable> productsTable;
@@ -55,6 +66,26 @@ public class ProductsController {
         showColumn();
     }
 
+    private void search() {
+        List<ProductTable> productsList = Main.session.GetProduct();
+        productTableData.clear();
+
+        for (int i = 0; i < productsList.size(); i++) {
+            if (productsList.get(i).getModel().equals(searchField.getText()))  // if (model == searchField) ...
+                productTableData.add(productsList.get(i));
+        }
+
+        if (productTableData.size() == 0) {
+            showTable();
+            message.setText("Not Found");
+        }
+        else {
+            productsTable.setItems(productTableData);
+            message.setText(" ");
+
+        }
+    }
+
     private void showColumn() {
         ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -85,6 +116,8 @@ public class ProductsController {
      */
     @FXML
     public void clickButtons() {
+        searchButton.setOnAction(event -> search());
+
         newOrderButton.setOnAction(event -> {
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 

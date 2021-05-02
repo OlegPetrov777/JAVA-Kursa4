@@ -66,8 +66,6 @@ public class ProductAddPage {
 
                 Main.session.CreateProduct(productCreate);
 
-                ProductsController productsController = new ProductsController();
-                productsController.initialize();
                 cancelButton.getScene().getWindow().hide();
             }
         });

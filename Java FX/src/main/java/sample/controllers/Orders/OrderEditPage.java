@@ -27,6 +27,9 @@ public class OrderEditPage  {
     private TextField productIdField;
 
     @FXML
+    private TextField amountField;
+
+    @FXML
     private Button okButton;
 
     @FXML
@@ -34,6 +37,10 @@ public class OrderEditPage  {
 
     @FXML
     private Label message;
+
+
+    private Order order;
+
 
     @FXML
     void initialize() { }
@@ -43,6 +50,15 @@ public class OrderEditPage  {
         okButton.setOnAction(event -> {
             if (isInputValid()){
 
+                Integer prod_id = Integer.parseInt(productIdField.getText().trim()); // Конвертация string в int
+                Integer amount = Integer.parseInt(amountField.getText().trim());
+
+                order.setDate_of_create(createDate.getValue());
+                order.setDate_of_ready(completionDate.getValue());
+                order.setProduct_id(prod_id);
+                order.setAmount(amount);
+
+                Main.session.UpdateOrder(order);
                 cancelButton.getScene().getWindow().hide();
             }
         });
@@ -52,9 +68,11 @@ public class OrderEditPage  {
     }
 
     private void setOrder(Order order) {
+        this.order = order;
         createDate.setValue(order.getDate_of_create());
         completionDate.setValue(order.getDate_of_ready());
         productIdField.setText(order.getProduct_id().toString());
+        amountField.setText(order.getAmount().toString());
     }
 
     private boolean isInputValid() {

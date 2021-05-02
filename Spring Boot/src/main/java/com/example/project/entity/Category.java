@@ -20,6 +20,7 @@ public class Category {
 
     @OneToMany(mappedBy="category", fetch=FetchType.EAGER)
     @JsonIgnore
+
     private Collection<Model> models;
 
     public Long getId() {

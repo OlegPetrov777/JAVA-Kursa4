@@ -48,7 +48,7 @@ public class ProductEditPage {
     private Button cancelButton;
 
 
-    private Integer modelID;
+    private Integer productID;
     ObservableList<ModelTable> modelData = FXCollections.observableArrayList();
     ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
@@ -65,7 +65,7 @@ public class ProductEditPage {
                 List<ModelCreate> oneModelInList = Main.session.GetModelsByName(modelBox.getValue());
                 ModelCreate currentCompany = oneModelInList.get(0);
 
-                ProductCreate productCreate = new ProductCreate(modelID, currentCompany, priceField.getText(), colorField.getText(), countField.getText());
+                ProductCreate productCreate = new ProductCreate(productID, currentCompany, priceField.getText(), colorField.getText(), countField.getText());
 
                 Main.session.UpdateProduct(productCreate);
 
@@ -82,7 +82,7 @@ public class ProductEditPage {
 
 
     public void setProduct(ProductTable productTable) {
-        modelID = productTable.getId();
+        productID = productTable.getId();
         priceField.setText(productTable.getPrice());
         colorField.setText(productTable.getColor());
         countField.setText(productTable.getCount());

@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Main;
 import sample.controllers.MenuBarController;
-import sample.controllers.Products.ProductEditPage;
 import sample.models.Order;
 import sample.models.Product.ProductTable;
 
@@ -31,6 +30,9 @@ public class OrderController {
     private TableColumn<Order, String> idProduct;
 
     @FXML
+    private TableColumn<Order, String> amountColumn;
+
+    @FXML
     private Button editButton;
 
     @FXML
@@ -51,7 +53,9 @@ public class OrderController {
     @FXML
     private Label countLabel;
 
+
     ObservableList<Order> orderData = FXCollections.observableArrayList();
+
 
     @FXML
     public void initialize() {
@@ -91,6 +95,7 @@ public class OrderController {
         createColumn.setCellValueFactory(new PropertyValueFactory<>("date_of_create"));
         completionColumn.setCellValueFactory(new PropertyValueFactory<>("date_of_ready"));
         idProduct.setCellValueFactory(new PropertyValueFactory<>("product_id"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
 
     private void showTable(){
