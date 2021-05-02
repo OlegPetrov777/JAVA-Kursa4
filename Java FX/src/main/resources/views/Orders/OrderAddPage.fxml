@@ -22,14 +22,14 @@
             <RowConstraints minHeight="10.0" prefHeight="54.0" />
         </rowConstraints>
          <children>
-            <Label text="Date of creation" GridPane.rowIndex="2">
+            <Label text="Date of creation" wrapText="true" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin></Label>
-            <Label text="Date of completion" GridPane.rowIndex="3">
+            <Label text="Date of completion" wrapText="true" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font>

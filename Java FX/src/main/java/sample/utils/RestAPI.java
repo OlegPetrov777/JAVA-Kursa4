@@ -21,19 +21,21 @@ public class RestAPI {
     public List<Order> GetOrder() {
         List<Order> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/order");
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
-        for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentOrder = jsonResult.get(i).getAsJsonObject();
+        if (buffer != null) {
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject currentOrder = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentOrder.get("id").getAsInt();
-            LocalDate dateOfCreate = DateUtil.parse(currentOrder.get("date_of_create").getAsString());
-            LocalDate dateOfReady = DateUtil.parse(currentOrder.get("date_of_ready").getAsString());
-            Integer productId = currentOrder.get("product_id").getAsInt();
-            Integer amount = currentOrder.get("amount").getAsInt();
+                Integer id = currentOrder.get("id").getAsInt();
+                LocalDate dateOfCreate = DateUtil.parse(currentOrder.get("date_of_create").getAsString());
+                LocalDate dateOfReady = DateUtil.parse(currentOrder.get("date_of_ready").getAsString());
+                Integer productId = currentOrder.get("product_id").getAsInt();
+                Integer amount = currentOrder.get("amount").getAsInt();
 
-            Order order = new Order(id, dateOfCreate, dateOfReady, productId, amount);
-            result.add(order);
+                Order order = new Order(id, dateOfCreate, dateOfReady, productId, amount);
+                result.add(order);
+            }
         }
         return result;
     }
@@ -58,26 +60,26 @@ public class RestAPI {
         List<ProductTable> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/product");
 
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        if (buffer != null) {
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject currentProduct = jsonResult.get(i).getAsJsonObject();
 
-        for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentProduct = jsonResult.get(i).getAsJsonObject();
+                Integer id = currentProduct.get("id").getAsInt();
+                String model = currentProduct.get("model").getAsJsonObject().get("name").getAsString();
+                String price = currentProduct.get("price").getAsString();
+                String color = currentProduct.get("color").getAsString();
+                String count = currentProduct.get("count").getAsString();
 
-            Integer id = currentProduct.get("id").getAsInt();
-            String model = currentProduct.get("model").getAsJsonObject().get("name").getAsString();
-            String price = currentProduct.get("price").getAsString();
-            String color = currentProduct.get("color").getAsString();
-            String count = currentProduct.get("count").getAsString();
-
-            ProductTable productTable = new ProductTable(id, model, price, color, count);
-            result.add(productTable);
+                ProductTable productTable = new ProductTable(id, model, price, color, count);
+                result.add(productTable);
+            }
         }
         return result;
     }
 
     public ProductTable GetProductById(Integer id) {
         String buffer = HttpClass.GetRequest(ServerURL + "/product/" + id);
-
         JsonObject currentProduct = JsonParser.parseString(buffer).getAsJsonObject();
 
         if (currentProduct != null) {
@@ -85,7 +87,6 @@ public class RestAPI {
             String price = currentProduct.get("price").getAsString();
             String color = currentProduct.get("color").getAsString();
             String count = currentProduct.get("count").getAsString();
-
 
             return new ProductTable(id, model, price, color, count);
         } else
@@ -111,18 +112,20 @@ public class RestAPI {
     public List<ModelTable> GetModel() {
         List<ModelTable> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/model");
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
-        for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentModel = jsonResult.get(i).getAsJsonObject();
+        if (buffer != null) {
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject currentModel = jsonResult.get(i).getAsJsonObject();
 
-            Integer id = currentModel.get("id").getAsInt();
-            String name = currentModel.get("name").getAsString();
-            String category = currentModel.get("category").getAsJsonObject().get("id").getAsString();
-            String company = currentModel.get("company").getAsJsonObject().get("id").getAsString();
+                Integer id = currentModel.get("id").getAsInt();
+                String name = currentModel.get("name").getAsString();
+                String category = currentModel.get("category").getAsJsonObject().get("id").getAsString();
+                String company = currentModel.get("company").getAsJsonObject().get("id").getAsString();
 
-            ModelTable modelTable = new ModelTable(id, name, category, company);
-            result.add(modelTable);
+                ModelTable modelTable = new ModelTable(id, name, category, company);
+                result.add(modelTable);
+            }
         }
         return result;
     }
@@ -178,7 +181,6 @@ public class RestAPI {
     public void UpdateModel(ModelCreate modelCreate) {
         Integer id = modelCreate.getId();
         String jsonString = modelCreate.toJsonPUT();
-
         HttpClass.PutRequest(ServerURL + "/model/" + id, jsonString);
     }
 
@@ -192,16 +194,17 @@ public class RestAPI {
         List<Category> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/category");
 
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        if (buffer != null) {
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject currentCategory = jsonResult.get(i).getAsJsonObject();
 
-        for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentCategory = jsonResult.get(i).getAsJsonObject();
+                Integer id = currentCategory.get("id").getAsInt();
+                String name = currentCategory.get("name").getAsString();
 
-            Integer id = currentCategory.get("id").getAsInt();
-            String name = currentCategory.get("name").getAsString();
-
-            Category category = new Category(id, name);
-            result.add(category);
+                Category category = new Category(id, name);
+                result.add(category);
+            }
         }
         return result;
     }
@@ -260,16 +263,17 @@ public class RestAPI {
         List<Company> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/company");
 
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        if (buffer != null) {
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject currentCompany = jsonResult.get(i).getAsJsonObject();
 
-        for (int i = 0; i < jsonResult.size(); i++) {
-            JsonObject currentCompany = jsonResult.get(i).getAsJsonObject();
+                Integer id = currentCompany.get("id").getAsInt();
+                String name = currentCompany.get("name").getAsString();
 
-            Integer id = currentCompany.get("id").getAsInt();
-            String name = currentCompany.get("name").getAsString();
-
-            Company company = new Company(id, name);
-            result.add(company);
+                Company company = new Company(id, name);
+                result.add(company);
+            }
         }
         return result;
     }
@@ -294,7 +298,6 @@ public class RestAPI {
 
         if (buffer != null) {
             JsonArray jsonAnswer = JsonParser.parseString(buffer).getAsJsonArray();
-
             for (int i = 0; i < jsonAnswer.size(); i++) {
                 JsonObject currentCompany = jsonAnswer.get(i).getAsJsonObject();
 

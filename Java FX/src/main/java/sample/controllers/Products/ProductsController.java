@@ -11,7 +11,6 @@ import sample.controllers.MenuBarController;
 import sample.controllers.Orders.OrderAddPage;
 import sample.models.Product.ProductTable;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -43,6 +42,9 @@ public class ProductsController {
 
     @FXML
     private TableColumn<ProductTable, String> countColumn;
+
+    @FXML
+    private Button updateButton;
 
     @FXML
     private Button newOrderButton;
@@ -79,8 +81,7 @@ public class ProductsController {
         if (productTableData.size() == 0) {
             showTable();
             message.setText("Not Found");
-        }
-        else {
+        } else {
             productsTable.setItems(productTableData);
             message.setText(" ");
 
@@ -95,7 +96,7 @@ public class ProductsController {
         countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
     }
 
-    private void showTable(){
+    private void showTable() {
         productTableData.clear();
         productTableData.addAll(Main.session.GetProduct());
         productsTable.setItems(productTableData);
@@ -104,9 +105,9 @@ public class ProductsController {
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(MenuBarController.primaryStage);
-        alert.setTitle("ОШИБКА");
-        alert.setHeaderText("Пользователи не выбраны");
-        alert.setContentText("Пожалуйста, выберите пользователя");
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Not Found");
+        alert.setContentText("You have not selected a field in the table.\nDo it, please!");
 
         alert.showAndWait();
     }
@@ -117,6 +118,8 @@ public class ProductsController {
      */
     @FXML
     public void clickButtons() {
+        updateButton.setOnAction(event -> initialize());
+
         searchButton.setOnAction(event -> search());
 
         newOrderButton.setOnAction(event -> {

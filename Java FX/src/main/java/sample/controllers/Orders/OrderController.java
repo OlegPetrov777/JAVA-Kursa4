@@ -108,8 +108,8 @@ public class OrderController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(MenuBarController.primaryStage);
         alert.setTitle("ERROR");
-        alert.setHeaderText("No field selected!");
-        alert.setContentText("Please select a table field");
+        alert.setHeaderText("Not Found");
+        alert.setContentText("You have not selected a field in the table.\nDo it, please!");
 
         alert.showAndWait();
     }

@@ -101,9 +101,9 @@ public class TechnicalInfoController {
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(MenuBarController.primaryStage);
-        alert.setTitle("ОШИБКА");
-        alert.setHeaderText("Пользователи не выбраны");
-        alert.setContentText("Пожалуйста, выберите пользователя");
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Not Found");
+        alert.setContentText("You have not selected a field in the table.\nDo it, please!");
 
         alert.showAndWait();
     }

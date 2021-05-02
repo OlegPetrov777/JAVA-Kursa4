@@ -99,6 +99,15 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></HBox>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="updateButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-but" text="Update">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </children>
