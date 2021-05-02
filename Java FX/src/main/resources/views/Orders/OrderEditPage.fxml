@@ -1,73 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #5e8e73;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Orders.OrderEditPage">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" styleClass="pane" stylesheets="@../../style/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Orders.OrderEditPage">
     <children>
-        <Label layoutX="124.0" layoutY="14.0" text="EDIT Order" textFill="#80b96b">
-            <font>
-                <Font name="Impact" size="36.0" />
-            </font>
-        </Label>
-        <GridPane layoutX="30.0" layoutY="99.0" prefHeight="205.0" prefWidth="340.0">
+        <GridPane layoutX="30.0" layoutY="99.0" prefHeight="205.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" minWidth="10.0" prefWidth="120.0" />
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="38.0" />
+                <RowConstraints minHeight="10.0" prefHeight="38.0" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="54.0" />
             </rowConstraints>
             <children>
-                <Label text="Date of creation">
+                <Label text="Date of creation" wrapText="true" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
-                    </font></Label>
-                <Label text="Date of completion" GridPane.rowIndex="1">
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin></Label>
+                <Label text="Date of completion" wrapText="true" GridPane.rowIndex="3">
                     <font>
                         <Font size="18.0" />
-                    </font></Label>
-                <Label text="Product ID" GridPane.rowIndex="2">
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin></Label>
+                <Label text="Product ID" GridPane.rowIndex="4">
                     <font>
                         <Font size="18.0" />
-                    </font></Label>
-                <TextField fx:id="productIdField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <DatePicker fx:id="createDate" GridPane.columnIndex="1" />
-                <DatePicker fx:id="completionDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Amount" GridPane.rowIndex="3">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="amountField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin></Label>
+                <DatePicker fx:id="createDate" prefHeight="26.0" prefWidth="278.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets right="10.0" />
+                    </GridPane.margin></DatePicker>
+                <DatePicker fx:id="completionDate" prefHeight="26.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <GridPane.margin>
+                        <Insets right="10.0" />
+                    </GridPane.margin></DatePicker>
+                <TextField fx:id="productIdField" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <GridPane.margin>
+                        <Insets right="10.0" />
+                    </GridPane.margin></TextField>
+                <Label text="Amount" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="amountField" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets right="10.0" />
+                    </GridPane.margin></TextField>
+                <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <children>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" prefWidth="100.0" styleClass="button-but" text="Cancel">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin></Button>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                    <children>
+                        <Button fx:id="okButton" mnemonicParsing="false" prefWidth="100.0" styleClass="button-but" text="OK">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <Label fx:id="message" prefHeight="30.0" prefWidth="340.0" text=" " textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="H-box">
+                    <children>
+                        <Label styleClass="labelTitle" text="EDIT">
+                            <font>
+                                <Font name="Impact" size="28.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="H-box" GridPane.columnIndex="1">
+                    <children>
+                        <Label styleClass="labelTitle" text="Order" textFill="#80b96b">
+                            <font>
+                                <Font name="Impact" size="28.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
             </children>
         </GridPane>
-        <HBox alignment="CENTER" layoutX="30.0" layoutY="312.0" prefHeight="64.0" prefWidth="340.0">
-            <children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button fx:id="okButton" mnemonicParsing="false" prefWidth="85.0" text="OK">
-                            <font>
-                                <Font size="14.0" />
-                            </font></Button>
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" prefWidth="85.0" text="Cancel">
-                            <font>
-                                <Font size="14.0" />
-                            </font></Button>
-                    </children>
-                </HBox>
-            </children></HBox>
-        <Label fx:id="message" layoutX="30.0" layoutY="82.0" prefHeight="18.0" prefWidth="340.0" text=" " textFill="RED">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
     </children>
 </AnchorPane>

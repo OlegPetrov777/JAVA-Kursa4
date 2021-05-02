@@ -9,7 +9,7 @@
    <children>
       <AnchorPane layoutX="400.0" prefHeight="555.0" prefWidth="600.0" styleClass="paneMini" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.799999999999955">
          <children>
-            <Label layoutX="169.0" layoutY="116.0" styleClass="labelAuthorization" text="Authorization" textAlignment="CENTER" textFill="#e2ffa0">
+            <Label layoutX="169.0" layoutY="116.0" styleClass="labelAuthorization" text="Authorization" textAlignment="CENTER" textFill="#80b96b">
                <font>
                   <Font name="Impact" size="48.0" />
                </font>
@@ -59,7 +59,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <Label fx:id="alarmLabel" text=" " textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1">
+                  <Label fx:id="alarmLabel" text=" " textAlignment="CENTER" textFill="#ff7e7e" GridPane.columnIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -73,7 +73,7 @@
             <Font name="Impact" size="64.0" />
          </font>
       </Label>
-      <SVGPath content="M592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h240v32H112a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16H352v-32h240a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm-16 352H64V64h512z" fill="#005141" layoutX="-167.0" layoutY="21.0" scaleX="0.4" scaleY="0.4" />
-      <SVGPath content="M400 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM224 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm176-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h328c6.6 0 12 5.4 12 12v312z" fill="#005141" layoutX="72.0" layoutY="98.0" scaleX="0.3" scaleY="0.3" />
+      <SVGPath content="M592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h240v32H112a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16H352v-32h240a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm-16 352H64V64h512z" fill="#a9c3b9" layoutX="-167.0" layoutY="21.0" scaleX="0.4" scaleY="0.4" />
+      <SVGPath content="M400 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM224 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm176-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h328c6.6 0 12 5.4 12 12v312z" fill="#a9c3b9" layoutX="72.0" layoutY="98.0" scaleX="0.3" scaleY="0.3" />
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import sample.controllers.MenuBarController;
 import sample.controllers.Orders.OrderAddPage;
 import sample.models.Product.ProductTable;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -71,7 +72,7 @@ public class ProductsController {
         productTableData.clear();
 
         for (int i = 0; i < productsList.size(); i++) {
-            if (productsList.get(i).getModel().equals(searchField.getText()))  // if (model == searchField) ...
+            if (productsList.get(i).getModel().startsWith(searchField.getText()))  // if (model == searchField) ...
                 productTableData.add(productsList.get(i));
         }
 

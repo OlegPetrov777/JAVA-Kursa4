@@ -1,27 +1,27 @@
 .root {
-    -fx-background-color: #00211b;
+    -fx-background-color: #013e37;
 }
 
 .labelGreensPark {
-    -fx-text-fill: #005141;
+    -fx-text-fill: #a9c3b9;
 }
 .pane {
-    -fx-background-color: #00211b;
+    -fx-background-color: #013e37;
 }
 
 
 .labelAuthorization {
-    -fx-text-fill: #00211b;
+    -fx-text-fill: #013e37;
 }
 .paneMini {
-    -fx-background-color: #005141;
+    -fx-background-color: #a9c3b9;
 }
 
 
 .text-field, .password-field {
     -fx-border-color:  #000000;
-    -fx-background-color: #005141;
-    -fx-text-fill: #000000;
+    -fx-background-color: #a9c3b9;
+    -fx-prompt-text-fill: #000000;
 
     -fx-background-radius: 10 10 10 10;
     -fx-border-radius: 10 10 10 10;
@@ -37,7 +37,7 @@
 
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #a9c3b9;
 
     /*-fx-padding: 5 22 5 22;*/
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -46,34 +46,3 @@
 .button:hover {
     -fx-background-color: #014034;
 }
-
-
-
-/*.button:pressed, .button:default:hover:pressed {*/
-/*    -fx-background-color: #A4F7FF;*/
-/*    -fx-text-fill: #1d1d1d;*/
-/*}*/
-
-/*.button:focused {*/
-/*    -fx-border-color: #A4F7FF, #A4F7FF;*/
-/*    -fx-border-width: 1, 1;*/
-/*    -fx-border-style: solid, segments(1, 1);*/
-/*    -fx-background-radius: 10 10 10 10;*/
-/*    -fx-border-radius: 10 10 10 10;*/
-/*    -fx-border-insets: 1 1 1 1, 0;*/
-/*}*/
-
-/*.button:disabled, .button:default:disabled {*/
-/*    -fx-opacity: 0.4;*/
-/*    -fx-background-color: #1d1d1d;*/
-/*    -fx-text-fill: #A4F7FF;*/
-/*}*/
-
-/*.button:default {*/
-/*    -fx-background-color: -fx-focus-color;*/
-/*    -fx-text-fill: #A4F7FF;*/
-/*}*/
-
-/*.button:default:hover {*/
-/*    -fx-background-color: derive(-fx-focus-color,30%);*/
-/*}*/

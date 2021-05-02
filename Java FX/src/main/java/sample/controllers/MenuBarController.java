@@ -86,7 +86,7 @@ public class MenuBarController {
      */
     public static void showMenuBarPage() {
         try {
-            primaryStage.setTitle("GreensPark APP");
+            primaryStage.setTitle("GreenSpark APP");
 
             FXMLLoader loader = new FXMLLoader(MenuBarController.class.getResource("/views/MenuBar.fxml"));
 

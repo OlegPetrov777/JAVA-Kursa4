@@ -1,39 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="558.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
+<AnchorPane prefHeight="558.0" prefWidth="1000.0" styleClass="pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Products.ProductsController">
    <children>
-      <TableView fx:id="productsTable" layoutY="76.0" prefHeight="466.0" prefWidth="1001.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+      <TableView fx:id="productsTable" layoutX="-14.0" layoutY="152.0" prefHeight="425.0" prefWidth="980.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="125.0">
         <columns>
           <TableColumn fx:id="ID" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="modelColumn" prefWidth="450.0" text="Model" />
           <TableColumn fx:id="priceColumn" prefWidth="150.0" text="Price, $" />
             <TableColumn fx:id="colorColumn" prefWidth="150.0" text="Color" />
-            <TableColumn fx:id="countColumn" prefWidth="148.0" text="Amount, pcs" />
+            <TableColumn fx:id="countColumn" prefWidth="125.0" text="Amount, pcs" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="10.0" text="Products" textFill="#80b96b">
-         <font>
-            <Font name="Impact" size="36.0" />
-         </font>
-      </Label>
-      <ButtonBar layoutX="602.0" layoutY="36.0" prefHeight="40.0" prefWidth="392.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="602.0">
-        <buttons>
-            <Button fx:id="newOrderButton" minWidth="58.0" mnemonicParsing="false" prefHeight="26.0" text="New Order" />
-          <Button fx:id="newButton" minWidth="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="New Product" />
-            <Button fx:id="editButton" minWidth="24.0" mnemonicParsing="false" prefHeight="26.0" text="Edit" />
-            <Button fx:id="deleteButton" minWidth="39.0" mnemonicParsing="false" prefHeight="26.0" text="Delete" />
-        </buttons>
-      </ButtonBar>
-      <TextField fx:id="searchField" layoutX="250.0" layoutY="43.0" prefHeight="26.0" prefWidth="302.0" promptText="Search" />
-      <Button fx:id="searchButton" layoutX="552.0" layoutY="43.0" mnemonicParsing="false" text="Lupa" />
-      <Label fx:id="message" layoutX="250.0" layoutY="15.0" prefHeight="18.0" prefWidth="342.0" text=" " textFill="RED">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <ButtonBar layoutX="602.0" layoutY="36.0" prefHeight="40.0" prefWidth="392.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="602.0" />
+      <GridPane prefHeight="120.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="0.0" prefHeight="48.0" />
+          <RowConstraints minHeight="10.0" prefHeight="70.0" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="H-box">
+               <children>
+                  <Label styleClass="labelTitle" text="Products" textFill="#80b96b">
+                     <font>
+                        <Font name="Impact" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="H-box" GridPane.columnIndex="1" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="H-box" GridPane.columnIndex="2" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="message" alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="423.0" text=" " textFill="RED">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" scaleShape="false">
+                           <children>
+                              <TextField fx:id="searchField" prefHeight="31.0" prefWidth="327.0" promptText="Search" />
+                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="31.0" styleClass="button-but" text="🔎">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="3.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children></VBox>
+               </children>
+            </VBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="70.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="newOrderButton" minWidth="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-but" text="New Order" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                      <Button fx:id="newButton" minWidth="20.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-but" text="New Product" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="editButton" minWidth="24.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-but" text="Edit" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="deleteButton" minWidth="39.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-but" text="Delete" />
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></HBox>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

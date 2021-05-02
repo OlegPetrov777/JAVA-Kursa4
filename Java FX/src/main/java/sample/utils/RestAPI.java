@@ -39,7 +39,6 @@ public class RestAPI {
     }
 
     public void CreateOrder(Order order) {
-        //System.out.println(order.toJson());
         HttpClass.PostRequest(ServerURL + "/order", order.toJson());
     }
 
@@ -53,7 +52,7 @@ public class RestAPI {
         Integer id = order.getId();
         return HttpClass.DeleteRequest(ServerURL + "/order/" + id);
     }
-//  #5e8e73          #1e5b48
+
 
     public List<ProductTable> GetProduct() {
         List<ProductTable> result = new ArrayList<>();
@@ -81,7 +80,7 @@ public class RestAPI {
 
         JsonObject currentProduct = JsonParser.parseString(buffer).getAsJsonObject();
 
-        if (currentProduct != null){
+        if (currentProduct != null) {
             String model = currentProduct.get("model").getAsJsonObject().get("name").getAsString();
             String price = currentProduct.get("price").getAsString();
             String color = currentProduct.get("color").getAsString();
@@ -109,7 +108,6 @@ public class RestAPI {
     }
 
 
-
     public List<ModelTable> GetModel() {
         List<ModelTable> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/model");
@@ -134,7 +132,7 @@ public class RestAPI {
 
         JsonObject currentModel = JsonParser.parseString(buffer).getAsJsonObject();
 
-        if (currentModel != null){
+        if (currentModel != null) {
             String name = currentModel.get("name").getAsString();
             String category = currentModel.get("category").getAsJsonObject().get("name").getAsString();
             String company = currentModel.get("company").getAsJsonObject().get("name").getAsString();
@@ -160,7 +158,7 @@ public class RestAPI {
                 String categoryName = currentModel.get("category").getAsJsonObject().get("name").getAsString();
                 Category category = new Category(categoryId, categoryName);
 
-                 /* COMPANY */
+                /* COMPANY */
                 Integer companyId = currentModel.get("company").getAsJsonObject().get("id").getAsInt();
                 String companyName = currentModel.get("company").getAsJsonObject().get("name").getAsString();
                 Company company = new Company(companyId, companyName);
@@ -190,7 +188,6 @@ public class RestAPI {
     }
 
 
-
     public List<Category> GetCategory() {
         List<Category> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/category");
@@ -214,7 +211,7 @@ public class RestAPI {
 
         JsonObject currentCategory = JsonParser.parseString(buffer).getAsJsonObject();
 
-        if (currentCategory != null){
+        if (currentCategory != null) {
             String name = currentCategory.get("name").getAsString();
 
             return new Category(id, name);
@@ -259,7 +256,6 @@ public class RestAPI {
     }
 
 
-
     public List<Company> GetCompany() {
         List<Company> result = new ArrayList<>();
         String buffer = HttpClass.GetRequest(ServerURL + "/company");
@@ -283,7 +279,7 @@ public class RestAPI {
 
         JsonObject currentCompany = JsonParser.parseString(buffer).getAsJsonObject();
 
-        if (currentCompany != null){
+        if (currentCompany != null) {
 
             String name = currentCompany.get("name").getAsString();
 
