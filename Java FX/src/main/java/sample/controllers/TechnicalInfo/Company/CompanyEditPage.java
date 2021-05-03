@@ -27,42 +27,51 @@ public class CompanyEditPage {
     @FXML
     private Button cancelButton;
 
-    @FXML
-    void initialize() {
-    }
-
-
+    /* ПЕРЕМЕННЫЕ */
     private Company company;
 
 
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()) {
+
+                /* РЕДАКТИРОВАНИЕ ОБЪЕКТА */
                 company.setName(nameField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД UPDATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ PUT-ЗАПРОСА НА СЕРВЕР */
                 Main.session.UpdateCompany(company);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide() );
     }
 
+    /**
+     * Заполнение полей старыми данными
+     * @param company
+     */
     public void setCompany(Company company) {
         this.company = company;
         nameField.setText(company.getName());
     }
 
-
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "Error: Name Field";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -71,6 +80,10 @@ public class CompanyEditPage {
         }
     }
 
+    /**
+     * Загрузка окна изменения Компании (CompanyEditPage)
+     * @param company
+     */
     public static void showCompanyEditPage(Company company) {
         try {
             Stage dialogueStage = new Stage();
@@ -91,7 +104,6 @@ public class CompanyEditPage {
             controller.clickButtons();
 
             dialogueStage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -28,41 +28,51 @@ public class CategoryEditPage {
     @FXML
     private Button cancelButton;
 
-    @FXML
-    void initialize() {    }
-
-
+    /* ПЕРЕМЕННЫЕ */
     private Category category;
 
 
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
+
+                /* РЕДАКТИРОВАНИЕ ОБЪЕКТА */
                 category.setName(nameField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД UPDATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ PUT-ЗАПРОСА НА СЕРВЕР */
                 Main.session.UpdateCategory(category);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide() );
     }
 
+    /**
+     * Заполнение полей старыми данными
+     * @param category
+     */
     public void setCategory(Category category) {
         this.category = category;
         nameField.setText(category.getName());
     }
 
-
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "Error: Name Field";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -71,6 +81,10 @@ public class CategoryEditPage {
         }
     }
 
+    /**
+     * Загрузка окна изменения категории (CategoryEditPage)
+     * @param category
+     */
     public static void showCategoryEditPage(Category category) {
         try {
             Stage dialogueStage = new Stage();
@@ -91,7 +105,6 @@ public class CategoryEditPage {
             controller.clickButtons();
 
             dialogueStage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -44,36 +44,60 @@ public class ProductAddPage {
     @FXML
     private Button cancelButton;
 
-    @FXML
-    void initialize() { }
-
-
+    /* ПЕРЕМЕННЫЕ */
     ObservableList<ModelTable> modelData = FXCollections.observableArrayList();
     ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
+
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
+
+                /* НАХОЖУ МОДЕЛЬ ПО ИМЕНИ (ПОЛУЧАЮ ЗНАЧЕНИЕ ИЗ КОМБО-БОКСА */
                 List<ModelCreate> oneModelInList = Main.session.GetModelsByName(modelBox.getValue());
                 ModelCreate currentCompany = oneModelInList.get(0);
 
+                /* СОЗДАЮ ОБЪЕКТ ПРОДУКТА (PRODUCT) */
                 ProductCreate productCreate = new ProductCreate();
                 productCreate.setModel(currentCompany);
                 productCreate.setPrice(priceField.getText());
                 productCreate.setColor(colorField.getText());
                 productCreate.setCount(countField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД CREATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ POST-ЗАПРОСА НА СЕРВЕР */
                 Main.session.CreateProduct(productCreate);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
+    /**
+     * Заполнение Комбо-Бокса названиями моделей
+     */
+    private void showComboBoxModel() {
+        modelData.clear();
+        modelData.addAll(Main.session.GetModel());
+
+        modelNameData.clear();
+        for (ModelTable modelTable: modelData){
+            modelNameData.add(modelTable.getName());
+        }
+        modelBox.setItems(modelNameData);
+    }
+
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (priceField.getText() == null || priceField.getText().length() == 0) {
@@ -97,17 +121,9 @@ public class ProductAddPage {
         }
     }
 
-    private void showComboBoxModel() {
-        modelData.clear();
-        modelData.addAll(Main.session.GetModel());
-
-        modelNameData.clear();
-        for (ModelTable modelTable: modelData){
-            modelNameData.add(modelTable.getName());
-        }
-        modelBox.setItems(modelNameData);
-    }
-
+    /**
+     * Загрузка окна создания продускта (ProductAddPage)
+     */
     public static void showProductAddPage() {
         try {
             Stage dialogueStage = new Stage();

@@ -58,37 +58,46 @@ public class ProductsController {
     @FXML
     private Button deleteButton;
 
-
+    /* ПЕРЕМЕННЫЕ */
     ObservableList<ProductTable> productTableData = FXCollections.observableArrayList();
 
 
+    /**
+     * Инициализация
+     */
     @FXML
     public void initialize() {
         clickButtons();
-        showTable();
-        showColumn();
+        setTable();
+        setColumn();
     }
 
+    /**
+     * Метод обрабатывает поисковый запрос
+     * Изменяет отображенные данные, в зависимости от введённого текста
+     */
     private void search() {
         List<ProductTable> productsList = Main.session.GetProduct();
         productTableData.clear();
 
         for (int i = 0; i < productsList.size(); i++) {
-            if (productsList.get(i).getModel().startsWith(searchField.getText()))  // if (model == searchField) ...
+            if (productsList.get(i).getModel().startsWith(searchField.getText()))  // if model start with searchField) ...
                 productTableData.add(productsList.get(i));
         }
-
+        /* Обработка ошибок (Ничего не найдено) */
         if (productTableData.size() == 0) {
-            showTable();
+            setTable();
             message.setText("Not Found");
         } else {
             productsTable.setItems(productTableData);
             message.setText(" ");
-
         }
     }
 
-    private void showColumn() {
+    /**
+     * Задаю значения колонкам
+     */
+    private void setColumn() {
         ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -96,32 +105,39 @@ public class ProductsController {
         countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
     }
 
-    private void showTable() {
+    /**
+     * Запихиваю в таблицу ObservableList (productTableData)
+     */
+    private void setTable() {
         productTableData.clear();
         productTableData.addAll(Main.session.GetProduct());
         productsTable.setItems(productTableData);
     }
 
+    /**
+     * Всплывающее окно, говорящее об ошибке
+     */
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(MenuBarController.primaryStage);
         alert.setTitle("ERROR");
         alert.setHeaderText("Not Found");
         alert.setContentText("You have not selected a field in the table.\nDo it, please!");
-
         alert.showAndWait();
     }
-
 
     /**
      * Обработка нажатий кнопок в Products
      */
     @FXML
     public void clickButtons() {
+        /* НАЖАТИЕ НА КНОПКУ UPDATE */
         updateButton.setOnAction(event -> initialize());
 
+        /* НАЖАТИЕ НА КНОПКУ SEARCH */
         searchButton.setOnAction(event -> search());
 
+        /* НАЖАТИЕ НА КНОПКУ NEW ORDER */
         newOrderButton.setOnAction(event -> {
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
 
@@ -133,9 +149,7 @@ public class ProductsController {
         });
 
         /* НАЖАТИЕ НА КНОПКУ NEW */
-        newButton.setOnAction(event -> {
-            ProductAddPage.showProductAddPage();
-        });
+        newButton.setOnAction(event -> ProductAddPage.showProductAddPage());
 
         /* НАЖАТИЕ НА КНОПКУ EDIT */
         editButton.setOnAction(event -> {
@@ -147,7 +161,6 @@ public class ProductsController {
             } else
                 showAlert();
         });
-
 
         /* НАЖАТИЕ НА КНОПКУ DELETE */
         deleteButton.setOnAction(event -> {

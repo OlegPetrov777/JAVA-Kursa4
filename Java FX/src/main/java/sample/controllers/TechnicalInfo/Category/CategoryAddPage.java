@@ -30,33 +30,39 @@ public class CategoryAddPage {
     @FXML
     private Button cancelButton;
 
-    @FXML
-    void initialize() {
-        clickButtons();
-    }
 
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
+
+                /* СОЗДАЮ ОБЪЕКТ КАТЕГОРИЯ (CATEGORY) */
                 Category category = new Category(nameField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД CREATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ POST-ЗАПРОСА НА СЕРВЕР */
                 Main.session.CreateCategory(category);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "Error: Name Field";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -65,6 +71,9 @@ public class CategoryAddPage {
         }
     }
 
+    /**
+     * Загрузка окна создания категории (CategoryAddPage)
+     */
     public static void showCategoryAddPage() {
         try {
             Stage dialogueStage = new Stage();
@@ -84,7 +93,6 @@ public class CategoryAddPage {
             controller.clickButtons();
 
             dialogueStage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

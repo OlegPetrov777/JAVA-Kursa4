@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import sample.Main;
 import sample.exception.AppException;
 
-
 public class LoginController {
 
     @FXML
@@ -28,8 +27,7 @@ public class LoginController {
     private Label alarmLabel;
 
     @FXML
-    public void initialize() {  }
-
+    public void initialize() {}
 
     /**
      * Отслеживание нажитсй кнопок (Sign In / Exit)
@@ -39,7 +37,7 @@ public class LoginController {
         loginButton.setOnAction(event -> signIn());
         exitButton.setOnAction(event -> exit());
 
-        // АКТИВАЦИЯ Sign In ЧЕРЕЗ Enter
+        // АКТИВАЦИЯ "Sign In" ЧЕРЕЗ "Enter"
         loginTextField.getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 signIn();
@@ -47,20 +45,20 @@ public class LoginController {
         });
     }
 
-
     /**
-     *  Выполняется вход в аккаунт
+     *  Проверка введенногологина и пароля
+     *  Если условие - True, тогда откроется новое окно MenuBar
      */
     @FXML
     private void signIn() {
 
         try {
-            String login = "1";  // login
-            String password = "1";  // password
+            String login = "root";  // login
+            String password = "root";  // password
 
             if (loginTextField.getText().equals(login) && passwordField.getText().equals(password)) {
 
-                /* ОТКРЫВАЕТСЯ ГЛАВНЫЙ ЭКРАН (MenuBar) */
+                /* ОТКРЫВАЕТСЯ ГЛАВНЫЙ ОКНО (MenuBar) */
                 MenuBarController.showMenuBarPage();
 
                 /* ЗАКРЫВАЕТСЯ СТРАНИЦА LOGIN */
@@ -84,9 +82,8 @@ public class LoginController {
         }
     }
 
-
     /**
-     *  Закрывается страница Login
+     *  Закрываю страницу Login
      */
     @FXML
     private void exit() {

@@ -87,28 +87,26 @@ public class TechnicalInfoController {
     @FXML
     private Button updateButton;
 
+    /* ПЕРЕМЕННЫЕ */
     ObservableList<Category> categoryData = FXCollections.observableArrayList();
     ObservableList<ModelTable> modelTableData = FXCollections.observableArrayList();
     ObservableList<Company> companyData = FXCollections.observableArrayList();
 
+
+    /**
+     * Инициализация
+     */
     @FXML
     public void initialize() {
-        showTables();
-        showColumns();
+        setTables();
+        setColumns();
         clickButtons();
     }
 
-    private void showAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.initOwner(MenuBarController.primaryStage);
-        alert.setTitle("ERROR");
-        alert.setHeaderText("Not Found");
-        alert.setContentText("You have not selected a field in the table.\nDo it, please!");
-
-        alert.showAndWait();
-    }
-
-    private void showTables(){
+    /**
+     * Запихиваю в каждую таблицу свой ObservableList
+     */
+    private void setTables(){
         /* CATEGORY */
         categoryData.clear();
         categoryData.addAll(Main.session.GetCategory());
@@ -125,7 +123,10 @@ public class TechnicalInfoController {
         modelTable.setItems(modelTableData);
     }
 
-    private void showColumns() {
+    /**
+     * Задаю значения колонкам всех таблиц
+     */
+    private void setColumns() {
         /* CATEGORY */
         idCategory.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCategory.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -141,17 +142,34 @@ public class TechnicalInfoController {
         comIdModel.setCellValueFactory(new PropertyValueFactory<>("company"));
     }
 
+    /**
+     * Всплывающее окно, говорящее об ошибке
+     */
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(MenuBarController.primaryStage);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Not Found");
+        alert.setContentText("You have not selected a field in the table.\nDo it, please!");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Обработка нажатий кнопок
+     */
     @FXML
     public void clickButtons() {
-
+        /* НАЖАТИЕ НА КНОПКУ UPDATE */
         updateButton.setOnAction(event -> {
-            showTables();
-            showColumns();
+            setTables();
+            setColumns();
         });
 
-
+        /* MODEL -- NEW */
         NewModelBut.setOnAction(event -> ModelAddPage.showModelAddPage());
 
+        /* MODEL -- EDIT */
         EditModelBut.setOnAction(event -> {
             int selectedIndex = modelTable.getSelectionModel().getSelectedIndex();
 
@@ -162,6 +180,7 @@ public class TechnicalInfoController {
                 showAlert();
         });
 
+        /* MODEL -- DELETE */
         DeleteModelBut.setOnAction(event -> {
             int selectedIndex = modelTable.getSelectionModel().getSelectedIndex();
 
@@ -174,10 +193,10 @@ public class TechnicalInfoController {
                 showAlert();
         });
 
-
-
+        /* COMPANY -- NEW */
         NewCompanyBut.setOnAction(event -> CompanyAddPage.showCompanyAddPage());
 
+        /* COMPANY -- EDIT */
         EditCompanyBut.setOnAction(event -> {
             int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
 
@@ -188,6 +207,7 @@ public class TechnicalInfoController {
                 showAlert();
         });
 
+        /* COMPANY -- DELETE */
         DeleteCompanyBut.setOnAction(event -> {
             int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
 
@@ -200,10 +220,10 @@ public class TechnicalInfoController {
                 showAlert();
         });
 
-
-
+        /* CATEGORY -- NEW */
         NewCategoryBut.setOnAction(event -> CategoryAddPage.showCategoryAddPage());
 
+        /* CATEGORY -- EDIT */
         EditCategoryBut.setOnAction(event -> {
             int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
 
@@ -214,6 +234,7 @@ public class TechnicalInfoController {
                 showAlert();
         });
 
+        /* CATEGORY -- DELETE */
         DeleteCategoryBut.setOnAction(event -> {
             int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
 

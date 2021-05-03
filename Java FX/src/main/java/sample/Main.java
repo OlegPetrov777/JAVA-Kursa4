@@ -14,17 +14,23 @@ public class Main extends Application {
     private Stage primaryStage;
     public static RestAPI session = new RestAPI();
 
+    /**
+     * Точка входа в программу
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
-
+    /**
+     * Старт
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("GreensPark APP");
         this.primaryStage.setResizable(false);  // Не позволяет изменять размеры окна
-
         showLoginPage();
     }
 

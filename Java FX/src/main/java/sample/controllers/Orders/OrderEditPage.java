@@ -38,35 +38,43 @@ public class OrderEditPage  {
     @FXML
     private Label message;
 
-
+    /* Переменные */
     private Order order;
 
 
-    @FXML
-    void initialize() { }
-
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
 
                 Integer prod_id = Integer.parseInt(productIdField.getText().trim()); // Конвертация string в int
-                Integer amount = Integer.parseInt(amountField.getText().trim());
+                Integer amount = Integer.parseInt(amountField.getText().trim());  // Конвертация string в int
 
+                /* РЕДАКТИРОВАНИЕ ЗАКАЗА */
                 order.setDate_of_create(createDate.getValue());
                 order.setDate_of_ready(completionDate.getValue());
                 order.setProduct_id(prod_id);
                 order.setAmount(amount);
 
+                /* ВЫЗЫВАЮ МЕТОД UPDATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ PUT-ЗАПРОСА НА СЕРВЕР */
                 Main.session.UpdateOrder(order);
+
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
+    /**
+     * Заполнение полей старыми данными
+     * @param order
+     */
     private void setOrder(Order order) {
         this.order = order;
         createDate.setValue(order.getDate_of_create());
@@ -75,6 +83,10 @@ public class OrderEditPage  {
         amountField.setText(order.getAmount().toString());
     }
 
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (productIdField.getText() == null || productIdField.getText().length() == 0) {
@@ -93,6 +105,10 @@ public class OrderEditPage  {
         }
     }
 
+    /**
+     * Загрузка окна изменения заказа (OrderEditPage)
+     * @param order
+     */
     public static void showOrderEditPage(Order order) {
         try {
             Stage dialogueStage = new Stage();

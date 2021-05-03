@@ -53,23 +53,32 @@ public class OrderController {
     @FXML
     private Label countLabel;
 
-
+    /* ПЕРЕМЕННЫЕ */
     ObservableList<Order> orderData = FXCollections.observableArrayList();
 
 
+    /**
+     * Инициализация
+     */
     @FXML
     public void initialize() {
-        showTable();
-        showColumn();
+        setTable();
+        setColumn();
         clickButtons();
 
         showProduct(null);
 
+        /* Отслеживание нажатий на поле таблицы */
         orderTable.getSelectionModel().selectedItemProperty().addListener(
                 ((observableValue, oldValue, newValue) -> showProduct(newValue))
         );
     }
 
+    /**
+     * Метод отображает данные о продукте, который находится в заказе, на который нажали ЛКМ
+     * Объект передается из initialize()
+     * @param order
+     */
     private void showProduct(Order order){
         if (order != null) {
             int index = order.getProduct_id();
@@ -90,7 +99,10 @@ public class OrderController {
         }
     }
 
-    private void showColumn() {
+    /**
+     * Задаю значения колонкам
+     */
+    private void setColumn() {
         ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         createColumn.setCellValueFactory(new PropertyValueFactory<>("date_of_create"));
         completionColumn.setCellValueFactory(new PropertyValueFactory<>("date_of_ready"));
@@ -98,25 +110,32 @@ public class OrderController {
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
 
-    private void showTable(){
+    /**
+     * Запихиваю в таблицу ОбсёрваблЛист (orderData)
+     */
+    private void setTable(){
         orderData.clear();
         orderData.addAll(Main.session.GetOrder());
         orderTable.setItems(orderData);
     }
 
+    /**
+     * Всплывающее окно, говорящее об ошибке
+     */
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(MenuBarController.primaryStage);
         alert.setTitle("ERROR");
         alert.setHeaderText("Not Found");
         alert.setContentText("You have not selected a field in the table.\nDo it, please!");
-
         alert.showAndWait();
     }
 
+    /**
+     * Обработка нажатий кнопок
+     */
     @FXML
     public void clickButtons() {
-
         /* НАЖАТИЕ НА КНОПКУ EDIT */
         editButton.setOnAction(event -> {
             int selectedIndex = orderTable.getSelectionModel().getSelectedIndex();

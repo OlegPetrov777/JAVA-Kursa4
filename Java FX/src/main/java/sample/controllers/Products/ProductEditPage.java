@@ -47,40 +47,43 @@ public class ProductEditPage {
     @FXML
     private Button cancelButton;
 
-
+    /* ПЕРЕМЕННЫЕ */
     private Integer productID;
     ObservableList<ModelTable> modelData = FXCollections.observableArrayList();
     ObservableList<String> modelNameData = FXCollections.observableArrayList();
 
 
-    @FXML
-    void initialize() {
-
-    }
-
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()) {
+
+                /* НАХОЖУ МОДЕЛЬ ПО ИМЕНИ (ПОЛУЧАЮ ЗНАЧЕНИЕ ИЗ КОМБО-БОКСА */
                 List<ModelCreate> oneModelInList = Main.session.GetModelsByName(modelBox.getValue());
                 ModelCreate currentCompany = oneModelInList.get(0);
 
+                /* СОЗДАЮ ОБЪЕКТ ПРОДУКТА (PRODUCT) */
                 ProductCreate productCreate = new ProductCreate(productID, currentCompany, priceField.getText(), colorField.getText(), countField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД UPDATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ PUT-ЗАПРОСА НА СЕРВЕР */
                 Main.session.UpdateProduct(productCreate);
 
-                // Close window
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ CANCEL */
-        cancelButton.setOnAction(event -> {
-            cancelButton.getScene().getWindow().hide();
-        });
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
+        cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
-
+    /**
+     * Заполнение полей старыми данными
+     * @param productTable
+     */
     public void setProduct(ProductTable productTable) {
         productID = productTable.getId();
         priceField.setText(productTable.getPrice());
@@ -89,7 +92,24 @@ public class ProductEditPage {
         modelBox.setValue(productTable.getModel());
     }
 
+    /**
+     * Заполнение Комбо-Бокса названиями моделей
+     */
+    private void showComboBoxModel() {
+        modelData.clear();
+        modelData.addAll(Main.session.GetModel());
 
+        modelNameData.clear();
+        for (ModelTable modelTable: modelData){
+            modelNameData.add(modelTable.getName());
+        }
+        modelBox.setItems(modelNameData);
+    }
+
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (priceField.getText() == null || priceField.getText().length() == 0) {
@@ -113,24 +133,12 @@ public class ProductEditPage {
         }
     }
 
-    private void showComboBoxModel() {
-        modelData.clear();
-        modelData.addAll(Main.session.GetModel());
-
-        modelNameData.clear();
-        for (ModelTable modelTable: modelData){
-            modelNameData.add(modelTable.getName());
-        }
-        modelBox.setItems(modelNameData);
-    }
-
     /**
-     * Загрузка окна изменения продусктов  EditProducts
+     * Загрузка окна изменения продускта (ProductEditPage)
      * @param productTable
      */
     public static void showProductEditPage(ProductTable productTable) {
         try {
-
             Stage dialogueStage = new Stage();
             dialogueStage.setTitle("Edit Product");
 

@@ -38,33 +38,44 @@ public class OrderAddPage {
     @FXML
     private Label message;
 
-    @FXML
-    void initialize() { }
-
-
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
 
                 Integer index = Integer.parseInt(productIdField.getText().trim()); // Конвертация string в int
-                Integer amount = Integer.parseInt(amountField.getText().trim());
+                Integer amount = Integer.parseInt(amountField.getText().trim());  // Конвертация string в int
 
+                /* СОЗДАЮ ОБЪЕКТ ЗАКАЗА (ORDER) */
                 Order order = new Order(createDate.getValue(), completionDate.getValue(), index, amount);
+
+                /* ВЫЗЫВАЮ МЕТОД CREATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ POST-ЗАПРОСА НА СЕРВЕР */
                 Main.session.CreateOrder(order);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
+    /**
+     * Сохраняю ID Продукта
+     * @param index
+     */
     private void setProductId(Integer index) {
         productIdField.setText(index.toString());
     }
 
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (productIdField.getText() == null || productIdField.getText().length() == 0) {
@@ -85,6 +96,9 @@ public class OrderAddPage {
         }
     }
 
+    /**
+     * Загрузка окна создания заказа (OrderAddPage)
+     */
     public static void showOrderAddPage(Integer index) {
         try {
             Stage dialogueStage = new Stage();

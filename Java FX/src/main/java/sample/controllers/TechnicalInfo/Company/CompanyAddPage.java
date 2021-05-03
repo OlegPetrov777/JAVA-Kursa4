@@ -27,33 +27,39 @@ public class CompanyAddPage {
     @FXML
     private Button cancelButton;
 
-    @FXML
-    void initialize() {
 
-    }
-
+    /**
+     * Обработка нажатий кнопок
+     */
     public void clickButtons() {
         /* НАЖАТИЕ НА КНОПКУ OK */
         okButton.setOnAction(event -> {
             if (isInputValid()){
+
+                /* СОЗДАЮ ОБЪЕКТ КОМПАНИИ (COMPANY) */
                 Company company = new Company(nameField.getText());
 
+                /* ВЫЗЫВАЮ МЕТОД CREATE, ДЛЯ ОСУЩЕСТВЛЕНИЯ POST-ЗАПРОСА НА СЕРВЕР */
                 Main.session.CreateCompany(company);
 
+                /* ЗАКРЫВАЮ ОКНО */
                 cancelButton.getScene().getWindow().hide();
             }
         });
 
-        /* НАЖАТИЕ НА КНОПКУ Cancel */
+        /* НАЖАТИЕ НА КНОПКУ CANCEL; ЗАКРЫВАЮ ОКНО */
         cancelButton.setOnAction(event -> cancelButton.getScene().getWindow().hide());
     }
 
+    /**
+     * Валидация введённых данных
+     * @return
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "Error: Name Field";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -62,6 +68,9 @@ public class CompanyAddPage {
         }
     }
 
+    /**
+     * Загрузка окна создания Компании (CompanyAddPage)
+     */
     public static void showCompanyAddPage() {
         try {
             Stage dialogueStage = new Stage();
@@ -81,7 +90,6 @@ public class CompanyAddPage {
             controller.clickButtons();
 
             dialogueStage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

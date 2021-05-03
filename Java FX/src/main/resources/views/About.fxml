@@ -25,7 +25,7 @@
          <children>
             <ImageView fitHeight="400.0" fitWidth="333.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../static/oleg.jpg" />
+                  <Image url="@../static/oleg.png" />
                </image>
             </ImageView>
             <Label text="ЭТО СДЕЛАЛ" GridPane.rowIndex="2">

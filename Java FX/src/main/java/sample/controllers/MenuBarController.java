@@ -1,6 +1,5 @@
 package sample.controllers;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 
 public class MenuBarController {
 
@@ -39,10 +37,13 @@ public class MenuBarController {
 
     @FXML
     private AnchorPane viewPane;
+
+    /* ПЕРЕМЕННЫЕ */
     public static Stage primaryStage = new Stage();
 
+
     /**
-     * Загрузка основного раздела на главный Pane (view Pane)
+     * Загрузка главной стрианицы на главный Pane (viewPane)
      */
     @FXML
     void initialize() {
@@ -56,8 +57,6 @@ public class MenuBarController {
     public void clickButtons() {
         mainButton.setOnAction(event -> showAnotherPage("MainPage"));
 
-        exitButton.setOnAction(event -> exit());
-
         productsButton.setOnAction(event -> showAnotherPage("Products/Products"));
 
         techinfoButton.setOnAction(event -> showAnotherPage("TechnicalInfo/TechnicalInfo"));
@@ -67,11 +66,14 @@ public class MenuBarController {
         ordersButton.setOnAction(event -> showAnotherPage("Orders/Orders"));
 
         aboutButton.setOnAction(event -> showAnotherPage("About"));
+
+        exitButton.setOnAction(event -> exit());
+
     }
 
     /**
      * Передаю название FXML файла в зависимоти от нажатой кнопки
-     * Загружаем на главный Pane (view Pane)
+     * Загружаем на главный Pane (viewPane)
      */
     private void showAnotherPage(String text) {
         try {
@@ -112,7 +114,6 @@ public class MenuBarController {
     /**
      * Закрывается главная страница MenuBar
      */
-    @FXML
     private void exit() {
         borderPane.getScene().getWindow().hide();
     }
