@@ -24,7 +24,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="H-box">
                <children>
-                  <Label styleClass="labelTitle" text="ГЛАВНАЯ  СТРАНИЦА" textFill="#80b96b">
+                  <Label styleClass="labelTitle" text="Main page" textFill="#80b96b">
                      <font>
                         <Font name="Impact" size="24.0" />
                      </font>
@@ -48,7 +48,7 @@
             </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label prefHeight="146.0" prefWidth="371.0" text="Данное приложение является внутренней информационной справочной системой магазина GREENSPARK!" textAlignment="JUSTIFY" wrapText="true">
+                  <Label prefHeight="146.0" prefWidth="385.0" text="Данное приложение является информационно-справочной системой магазина GREENSPARK!" textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font size="25.0" />
                      </font>

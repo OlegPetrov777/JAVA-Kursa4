@@ -10,15 +10,15 @@
    <children>
       <GridPane prefHeight="558.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="509.0" minWidth="10.0" prefWidth="500.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="158.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="48.0" minHeight="35.0" prefHeight="48.0" />
           <RowConstraints maxHeight="183.4" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="144.39998474121094" minHeight="10.0" prefHeight="144.39998474121094" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="96.4000152587891" minHeight="10.0" prefHeight="60.4000152587891" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -28,15 +28,18 @@
                   <Image url="@../static/oleg.png" />
                </image>
             </ImageView>
-            <Label text="ЭТО СДЕЛАЛ" GridPane.rowIndex="2">
+            <Label prefHeight="130.0" prefWidth="440.0" text="Крусовую работу " textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
                <font>
                   <Font name="Impact" size="48.0" />
                </font>
             </Label>
-            <Label text="Студент ПИ19-2" GridPane.rowIndex="3">
+            <Label prefHeight="82.0" prefWidth="229.0" text="Выполнил студент: ПИ19-2 Петров Олег " textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="3">
                <font>
                   <Font name="Impact" size="24.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="130.0" />
+               </GridPane.margin>
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="H-box">
                <children>
@@ -51,6 +54,15 @@
                </children></HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="H-box" GridPane.columnIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="H-box" GridPane.columnIndex="2" />
+            <Label alignment="CENTER" prefHeight="78.0" prefWidth="326.0" text="Научный руководитель: Кублик Евгений Ильич" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="40.0" prefWidth="370.0" text="Ссылка на GitHub: https://github.com/OlegPetrov777/JAVA-Kursa4/tree/oleg" wrapText="true" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

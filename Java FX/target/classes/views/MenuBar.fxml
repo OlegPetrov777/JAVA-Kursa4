@@ -48,7 +48,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="aboutButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="222.0" styleClass="buttonBar" text="About Us" textFill="#80b96b">
+                  <Button fx:id="aboutButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="222.0" styleClass="buttonBar" text="About Me" textFill="#80b96b">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
