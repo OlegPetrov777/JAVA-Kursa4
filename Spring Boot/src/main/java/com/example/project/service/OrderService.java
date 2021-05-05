@@ -1,6 +1,5 @@
 package com.example.project.service;
 
-import com.example.project.entity.Category;
 import com.example.project.entity.Order;
 import com.example.project.entity.Product;
 import com.example.project.repository.OrderRepository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class OrderService {
