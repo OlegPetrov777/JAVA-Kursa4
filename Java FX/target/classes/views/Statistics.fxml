@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="558.0" prefWidth="1000.0" styleClass="pane" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.StatisticsController">
+   <children>
+      <PieChart fx:id="pieChart" layoutY="72.0" prefHeight="478.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" />
+      <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="1000.0" styleClass="H-box">
+         <children>
+            <Label styleClass="labelTitle" text="Statistics">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,5 +1,7 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
+import com.example.project.entity.Company;
 import com.example.project.entity.Model;
 import com.example.project.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,21 @@ public class ModelController {
         return model.isPresent()
                 ? new ResponseEntity<>(model, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/api/model/name_{name}")
+    public ResponseEntity<List<Model>> findByName(@PathVariable(name = "name") String name){
+        final List<Model> modelList = modelService.findByName(name);
+        return modelList != null && !modelList.isEmpty()
+                ? new ResponseEntity<>(modelList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/api/model/{id}")
+    public ResponseEntity<List<Model>> update(@RequestBody Model model) {
+        final List<Model> modelList = modelService.update(model);
+
+        return new ResponseEntity<>(modelList, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/api/model/{id}")

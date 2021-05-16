@@ -45,6 +45,14 @@ public class CompanyController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/api/company/name_{name}")
+    public ResponseEntity<List<Company>> findByName(@PathVariable(name = "name") String name){
+        final List<Company> companyList = companyService.findByName(name);
+        return companyList != null && !companyList.isEmpty()
+                ? new ResponseEntity<>(companyList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PutMapping("/api/company/{id}")
     public ResponseEntity<List<Company>> update(@RequestBody Company company) {
         final List<Company> companyList = companyService.update(company);
@@ -58,6 +66,5 @@ public class CompanyController {
         companyService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 }

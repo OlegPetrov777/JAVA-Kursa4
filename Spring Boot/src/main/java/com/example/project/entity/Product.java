@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Product {
     private Model model;
 
     @OneToMany(mappedBy="product", fetch=FetchType.EAGER)
+    @JsonIgnore
     private Collection<Order> orders;
 
     public Long getId() {

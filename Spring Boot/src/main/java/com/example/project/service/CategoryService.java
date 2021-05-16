@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void create(Category manufacturer){
-        categoryRepository.save(manufacturer);
+    public void create(Category category){
+        categoryRepository.save(category);
     }
 
 
@@ -27,6 +26,12 @@ public class CategoryService {
     public Optional<Category> find(Long id){
         return categoryRepository.findById(id);
     }
+
+
+    public List<Category> findByName(String name){
+        return categoryRepository.findByName(name);
+    }
+
 
 
     public List<Category> update(Category category) {

@@ -1,0 +1,48 @@
+.root {
+    -fx-background-color: #013e37;
+}
+
+.labelGreensPark {
+    -fx-text-fill: #a9c3b9;
+}
+.pane {
+    -fx-background-color: #013e37;
+}
+
+
+.labelAuthorization {
+    -fx-text-fill: #013e37;
+}
+.paneMini {
+    -fx-background-color: #a9c3b9;
+}
+
+
+.text-field, .password-field {
+    -fx-border-color:  #000000;
+    -fx-background-color: #a9c3b9;
+    -fx-prompt-text-fill: #000000;
+
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+.button {
+    -fx-background-color: #1e5b48;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #a9c3b9;
+
+    /*-fx-padding: 5 22 5 22;*/
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #014034;
+}

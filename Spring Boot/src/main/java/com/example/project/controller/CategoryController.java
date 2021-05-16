@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.entity.Category;
+import com.example.project.entity.Company;
 import com.example.project.entity.Product;
 import com.example.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,14 @@ public class CategoryController {
 
         return category.isPresent()
                 ? new ResponseEntity<>(category, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/api/category/name_{name}")
+    public ResponseEntity<List<Category>> findByName(@PathVariable(name = "name") String name){
+        final List<Category> categoryList = categoryService.findByName(name);
+        return categoryList != null && !categoryList.isEmpty()
+                ? new ResponseEntity<>(categoryList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
