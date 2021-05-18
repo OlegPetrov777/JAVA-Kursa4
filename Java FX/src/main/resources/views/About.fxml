@@ -33,12 +33,12 @@
                   <Font name="Impact" size="48.0" />
                </font>
             </Label>
-            <Label prefHeight="82.0" prefWidth="229.0" text="Выполнил студент: ПИ19-2 Петров Олег " textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="3">
+            <Label prefHeight="82.0" prefWidth="290.0" text="Выполнил студент: ПИ19-2 Петров Олег Игоревич" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="3">
                <font>
                   <Font name="Impact" size="24.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="130.0" />
+                  <Insets left="70.0" />
                </GridPane.margin>
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="H-box">
