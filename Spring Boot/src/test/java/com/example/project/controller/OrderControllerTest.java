@@ -1,11 +1,16 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
+import com.example.project.repository.CategoryRepository;
+import com.example.project.repository.OrderRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -20,9 +25,8 @@ class OrderControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Test
-    void create() throws Exception {
-    }
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Test
     void findAll() throws Exception {
@@ -44,7 +48,7 @@ class OrderControllerTest {
 
     @Test
     void find() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/model/1"))
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/order/1"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(mvcResult -> {
@@ -56,10 +60,23 @@ class OrderControllerTest {
     }
 
     @Test
-    void update() {
+    void delete() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/order/6"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertFalse(orderRepository.existsById(6));
+                });
     }
 
-    @Test
-    void delete() {
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

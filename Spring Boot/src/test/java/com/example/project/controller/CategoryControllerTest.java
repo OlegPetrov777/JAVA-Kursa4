@@ -1,17 +1,22 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
+import com.example.project.repository.CategoryRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,8 +25,22 @@ class CategoryControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Test
     void create() throws Exception {
+        String name = "JUnit";
+        Category category = new Category(name);
+        this.mvc.perform(MockMvcRequestBuilders.post("http://localhost:8090/api/category")
+                .content(asJsonString(category))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertTrue(categoryRepository.existsByName(name));
+                });
     }
 
     @Test
@@ -71,10 +90,23 @@ class CategoryControllerTest {
     }
 
     @Test
-    void update() throws Exception {
+    void delete() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/category/6"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertFalse(categoryRepository.existsById(6));
+                });
     }
 
-    @Test
-    void delete() throws Exception {
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

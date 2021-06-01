@@ -19,6 +19,10 @@ public class Model {
 
     private String name;
 
+    public Model(String name) {
+        this.name = name;
+    }
+
     @ManyToOne(optional=false, cascade=CascadeType.MERGE)
     @JoinColumn(name="category_id")
     private Category category;

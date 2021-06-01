@@ -1,11 +1,17 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
+import com.example.project.entity.Model;
+import com.example.project.repository.CategoryRepository;
+import com.example.project.repository.ModelRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -20,8 +26,22 @@ class ModelControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private ModelRepository modelRepository;
+
     @Test
     void create() throws Exception {
+        String name = "JUnit";
+        Model model = new Model(name);
+        this.mvc.perform(MockMvcRequestBuilders.post("http://localhost:8090/api/model")
+                .content(asJsonString(model))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertTrue(modelRepository.existsByName(name));
+                });
     }
 
     @Test
@@ -71,10 +91,23 @@ class ModelControllerTest {
     }
 
     @Test
-    void update() throws Exception {
+    void delete() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/model/6"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertFalse(modelRepository.existsById(6));
+                });
     }
 
-    @Test
-    void delete() throws Exception {
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

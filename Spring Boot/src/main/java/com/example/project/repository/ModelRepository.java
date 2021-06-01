@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ModelRepository extends JpaRepository<Model, Long> {
     List<Model> findByName(String name);
+    Boolean existsByName(String name);
+    Boolean existsById(Integer id);
 }

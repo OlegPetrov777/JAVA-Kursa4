@@ -1,7 +1,10 @@
 package com.example.project.controller;
 
+import com.example.project.entity.Category;
 import com.example.project.entity.Company;
+import com.example.project.repository.CompanyRepository;
 import com.example.project.service.CompanyService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -26,11 +29,22 @@ class CompanyControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    private CompanyService companyService;
-    
+    @Autowired
+    private CompanyRepository companyRepository;
+
     @Test
     void create() throws Exception {
+        String name = "JUnit";
+        Company company = new Company(name);
+        this.mvc.perform(MockMvcRequestBuilders.post("http://localhost:8090/api/company")
+                .content(asJsonString(company))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertTrue(companyRepository.existsByName(name));
+                });
     }
 
     @Test
@@ -78,10 +92,23 @@ class CompanyControllerTest {
     }
 
     @Test
-    void update() throws Exception {
+    void delete() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/company/6"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(mvcResult -> {
+                    assertFalse(companyRepository.existsById(6));
+                });
     }
 
-    @Test
-    void delete() throws Exception {
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

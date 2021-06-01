@@ -22,6 +22,10 @@ public class Product {
 
     private Integer count;
 
+    public Product(String color) {
+        this.color = color;
+    }
+
     @ManyToOne(optional=false, cascade=CascadeType.MERGE)
     @JoinColumn(name="model_id")
     private Model model;

@@ -18,6 +18,10 @@ public class Category {
 
     private String name;
 
+    public Category(String name) {
+        this.name = name;
+    }
+
     @OneToMany(mappedBy="category", fetch=FetchType.EAGER)
     @JsonIgnore
     private Collection<Model> models;
