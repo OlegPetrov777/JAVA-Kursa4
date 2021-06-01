@@ -30,69 +30,69 @@ class CategoryControllerTest {
 
     @Test
     void create() throws Exception {
-        String name = "JUnit";
-        Category category = new Category(name);
-        this.mvc.perform(MockMvcRequestBuilders.post("http://localhost:8090/api/category")
+        String name = "JUnit"; // имя для объекта
+        Category category = new Category(name); // создал объект, чтобы отправить его
+        this.mvc.perform(MockMvcRequestBuilders.post("http://localhost:8090/api/category") // отправил запрос
                 .content(asJsonString(category))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    assertTrue(categoryRepository.existsByName(name));
+                    assertTrue(categoryRepository.existsByName(name)); // проверил, есить ли в бд объект с нужным name
                 });
     }
 
     @Test
     void findAll() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category")) // отправляем запрос
-                .andDo(MockMvcResultHandlers.print()) // выводим в консоль
-                .andExpect(status().is2xxSuccessful()) // проверяем пришел ли статус 200
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    String body = mvcResult.getResponse().getContentAsString(); // записываем то что пришло в строку
+                    String body = mvcResult.getResponse().getContentAsString(); // запихнул результ в строку
 
-                    JSONArray arr = new JSONArray(body); // переделываем в JSON
-                    JSONObject object = new JSONObject(arr.getString(0));
+                    JSONArray arr = new JSONArray(body); // переделал в JSON
+                    JSONObject object = new JSONObject(arr.getString(0)); // взял 1й объект
 
-                    assertEquals(object.get("id"), 1);
-                    assertEquals(object.get("name"), "Smartphone");
+                    assertEquals(object.get("id"), 1); // сверил id того объекта
+                    assertEquals(object.get("name"), "Smartphone"); // сверил name того объекта
                 })
                 .andReturn();
     }
 
     @Test
     void find() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category/1"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is2xxSuccessful())
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category/1")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    String body = mvcResult.getResponse().getContentAsString();
-                    JSONObject object = new JSONObject(body);
-                    assertEquals(object.get("id"), 1);
+                    String body = mvcResult.getResponse().getContentAsString(); // запихнул результ в строку
+                    JSONObject object = new JSONObject(body); // переделал в JSON
+                    assertEquals(object.get("id"), 1); // сверил id с id из запроса (1)
                 })
                 .andReturn();
     }
 
     @Test
     void findByName() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category/name_Smartphone"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is2xxSuccessful())
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/category/name_Smartphone")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    String body = mvcResult.getResponse().getContentAsString();
+                    String body = mvcResult.getResponse().getContentAsString(); // запихнул результ в строку
 
-                    JSONArray arr = new JSONArray(body);
-                    JSONObject object = new JSONObject(arr.getString(0));
+                    JSONArray arr = new JSONArray(body); // переделал в JSON
+                    JSONObject object = new JSONObject(arr.getString(0)); // взял 1й объект
 
-                    assertEquals(object.get("name"), "Smartphone");
+                    assertEquals(object.get("name"), "Smartphone"); // сверил name c name из запроса (Smartphone)
                 })
                 .andReturn();
     }
 
     @Test
     void delete() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/category/6"))
-                .andDo(MockMvcResultHandlers.print())
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/category/6")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(mvcResult -> {
                     assertFalse(categoryRepository.existsById(6));

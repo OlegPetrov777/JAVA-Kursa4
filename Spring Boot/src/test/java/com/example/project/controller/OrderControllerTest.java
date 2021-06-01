@@ -30,39 +30,39 @@ class OrderControllerTest {
 
     @Test
     void findAll() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/order")) // отправляем запрос
-                .andDo(MockMvcResultHandlers.print()) // выводим в консоль
-                .andExpect(status().is2xxSuccessful()) // проверяем пришел ли статус 200
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/order")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    String body = mvcResult.getResponse().getContentAsString(); // записываем то что пришло в строку
+                    String body = mvcResult.getResponse().getContentAsString(); // запихнул результ в строку
 
-                    JSONArray arr = new JSONArray(body); // переделываем в JSON
-                    JSONObject object = new JSONObject(arr.getString(0));
+                    JSONArray arr = new JSONArray(body); // переделал в JSON
+                    JSONObject object = new JSONObject(arr.getString(0)); // взял 1й объект
 
-                    assertEquals(object.get("id"), 1);
-                    assertEquals(object.get("date_of_create"), "02.05.2021");
-                    assertEquals(object.get("date_of_ready"), "06.06.2021");
+                    assertEquals(object.get("id"), 1); // сверил id того объекта
+                    assertEquals(object.get("date_of_create"), "02.05.2021"); // сверил дату
+                    assertEquals(object.get("date_of_ready"), "06.06.2021"); // сверил дату
                 })
                 .andReturn();
     }
 
     @Test
     void find() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/order/1"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is2xxSuccessful())
+        this.mvc.perform(MockMvcRequestBuilders.get("http://localhost:8090/api/order/1")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
+                .andExpect(status().is2xxSuccessful()) // проверил, пришел ли статус 200
                 .andExpect(mvcResult -> {
-                    String body = mvcResult.getResponse().getContentAsString();
-                    JSONObject object = new JSONObject(body);
-                    assertEquals(object.get("id"), 1);
+                    String body = mvcResult.getResponse().getContentAsString(); // запихнул результ в строку
+                    JSONObject object = new JSONObject(body); // переделал в JSON
+                    assertEquals(object.get("id"), 1); // сверил id с id из запроса (1)
                 })
                 .andReturn();
     }
 
     @Test
     void delete() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/order/6"))
-                .andDo(MockMvcResultHandlers.print())
+        this.mvc.perform(MockMvcRequestBuilders.delete("http://localhost:8090/api/order/6")) // отправил запрос
+                .andDo(MockMvcResultHandlers.print()) // вывел результат в консоль
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(mvcResult -> {
                     assertFalse(orderRepository.existsById(6));
